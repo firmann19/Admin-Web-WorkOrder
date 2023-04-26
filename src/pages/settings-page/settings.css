@@ -1,0 +1,62 @@
+h1 {
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 50px;
+}
+.container-settings {
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    width: 30%;
+    margin: 0 auto;
+}
+.container-settings h2 {
+    text-align: center;
+    font-size: 40px;
+    margin: 20px;
+    height: 60px;
+    color: red;
+}
+.container-settings img {
+    width: 120px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.container-settings input {
+    width: 80px;
+}
+.change-name {
+    display: grid;
+    grid-template-columns: column;
+}
+.change-name input {
+    font-size: 30px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    border-radius: 10px;
+    height: 60px;
+}
+.change-name button {
+    width: 40%;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    background-color: red;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    height: 60px;
+}
+
+@media (max-width: 400px) {
+    .container-settings {
+        border: 5px solid rgb(0, 0, 0);
+        border-radius: 25px;
+        width: 100%;
+        margin: 0 auto;
+
+    }
+}
