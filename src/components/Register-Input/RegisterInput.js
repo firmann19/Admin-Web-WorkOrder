@@ -2,73 +2,71 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SButton from "../Button";
 import SelectBox from "../selectBox";
+import { Col, Form, Row } from "react-bootstrap";
+import TextInputWithLabel from "../TextInputWithLabel";
 
 function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
   return (
-    <form className="container-register-user">
-      <h1>Register</h1>
-      <p>Create your account</p>
-      <input
-        type="text"
-        name="fullname"
-        className="colom-name"
-        placeholder="FullName"
+    <Form className="form-register">
+      <TextInputWithLabel
+        placeholder={"Masukan nama..."}
+        label={"Nama"}
+        name="name"
         value={form?.name}
+        type="text"
         onChange={handleChange}
       />
-      <input
-        type="text"
+
+      <TextInputWithLabel
+        placeholder={"Masukan email"}
+        label={"Email"}
         name="email"
-        className="colom-email"
-        placeholder="Email"
         value={form?.email}
+        type="text"
         onChange={handleChange}
       />
 
-      <div className="flex flex-wrap">
-        <div className="p-4 w-1/3">
-          <div className="relative">
-            <SelectBox
-              label={"Group"}
-              placeholder={"Pilih groud anda..."}
-              name="Group"
-              isClearable={true}
-              value={form.GroupId}
-              options={lists.GroupId}
-              handleChange={(e) => handleChange(e)}
-            />
-          </div>
-        </div>
+      <Row className="mt-4 mb-4">
+        <Col className="ms-2">
+          <SelectBox
+            label={"Group"}
+            placeholder={"Pilih group anda..."}
+            name="Group"
+            isClearable={true}
+            value={form.group}
+            options={lists.groups}
+            handleChange={(e) => handleChange(e)}
+          />
+        </Col>
 
-        <div className="p-4 w-1/3">
-          <div className="relative">
-            <SelectBox
-              label={"Departement"}
-              placeholder={"Pilih departement anda..."}
-              name="Departement"
-              isClearable={true}
-              value={form.DepartementId}
-              options={lists.DepartementId}
-              handleChange={(e) => handleChange(e)}
-            />
-          </div>
-        </div>
-      </div>
+        <Col className="me-3">
+          <SelectBox
+            label={"Departement"}
+            placeholder={"Pilih departement anda..."}
+            name="Departement"
+            isClearable={true}
+            value={form.departement}
+            options={lists.departements}
+            handleChange={(e) => handleChange(e)}
+          />
+        </Col>
+      </Row>
 
-      <input
-        type="text"
-        name="role"
-        className="colom-role"
-        placeholder="Role"
+      <TextInputWithLabel
+        placeholder={"Masukan Role..."}
+        label={"Role"}
+        name="roles"
         value={form?.roles}
+        type="text"
         onChange={handleChange}
       />
-      <input
-        type="text"
+
+      <TextInputWithLabel
+        placeholder={"Masukan Password"}
+        label={"Password"}
         name="password"
-        className="colom-password"
-        placeholder="Password"
         value={form?.password}
+        type="password"
         onChange={handleChange}
       />
       <div className="mx-auto w-25 mt-5">
@@ -84,7 +82,7 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
           </SButton>
         </Link>
       </div>
-    </form>
+    </Form>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
-import SButton from "../Button";
-import TextInputWithLabel from "../TextInputWithLabel";
+import SButton from "./Button";
+import TextInputWithLabel from "./TextInputWithLabel";
 import { Form } from "react-bootstrap";
 
 export default function SFORM({ form, handleChange, handleSubmit, isLoading }) {
@@ -28,7 +28,7 @@ export default function SFORM({ form, handleChange, handleSubmit, isLoading }) {
         loading={isLoading}
         disabled={isLoading}
         variant="primary"
-        className="w-full bg-danger font-Quicksand text-white border-2 mt-2 rounded py-2 px-4 hover:bg-primaryHover md:h-16 md:text-xl md:mt-4 lg:text-base lg:h-10"
+        className="bg-danger"
         action={handleSubmit}
       >
         Submit

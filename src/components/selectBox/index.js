@@ -9,6 +9,7 @@ function SelectBox({
   placeholder,
   handleChange,
   label,
+  className
 }) {
   return (
     <Form.Group>
@@ -19,6 +20,7 @@ function SelectBox({
         options={options}
         onChange={handleChange}
         value={value}
+        className={className}
       />
     </Form.Group>
   );

@@ -14,6 +14,7 @@ import {
     Tooltip,
     Legend
 } from 'chart.js'
+import NavbarItem from '../../components/navbar'
 
 ChartJS.register(
     CategoryScale,
@@ -31,7 +32,7 @@ const Dashboard = () => {
             <DashboardWrapperMain>
             <h1>Dashboard</h1>
                 <div className="row">
-                    <div className="col-12 col-md-12">
+                    <div className="col-12 col-md-12 flexflex-row">
                         <div className="row">
                             {
                                 data.summary.map((item, index) => (

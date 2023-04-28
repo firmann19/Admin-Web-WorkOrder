@@ -47,11 +47,11 @@ export const fetchListsDepartement = () => {
 
       let _temp = [];
 
-      res.data.data.getAll_users.forEach((res) => {
+      res.data.data.getAll_departement.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.nama,
-          target: { value: res.id, name: "departement" },
+          target: { value: res._id, name: "departement" },
         });
       });
 
@@ -96,11 +96,11 @@ export const fetchListsGroup = () => {
 
       let _temp = [];
 
-      res.data.data.forEach((res) => {
+      res.data.data.getAll_group.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.nama,
-          target: { value: res.id, name: "group" },
+          target: { value: res.GroupId, name: "group" },
         });
       });
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./sidebar.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logohta from "../../assets/images/logo-hta.png";
 import sidebarNav from "../../configs/sidebarNav";
 
@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "/";
+    window.location.href = "/login-page";
   };
 
   const closeSidebar = () => {
