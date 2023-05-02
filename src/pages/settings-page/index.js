@@ -1,80 +1,86 @@
-/* eslint-disable no-sparse-arrays */
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../redux/users/actions";
-import Swal from "sweetalert2";
-import { deleteData } from "../../utils/fetch";
-import { setNotif } from "../../redux/notif/actions";
-import { Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
-import Table from "../../components/TableWithAction"
+import SettingInput from "../../components/Setting-Input/SettingInput";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getData, putData } from "../../utils/fetch";
+import { setNotif } from "../../redux/notif/actions";
 
-function SettingPage() {
+const SettingsPage = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+  });
 
-  const notif = useSelector((state) => state.notif);
-  const users = useSelector((state) => state.users);
+  const [alert, setAlert] = useState({
+    status: false,
+    type: "",
+    message: "",
+  });
 
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Apa kamu yakin?",
-      text: "Anda tidak akan dapat mengembalikan ini!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Iya, Hapus",
-      cancelButtonText: "Batal",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const res = await deleteData(`/user/${id}`);
+  const fetchOneUser = async () => {
+    const res = await getData(`/user/${id}`);
 
-        dispatch(
-          setNotif(
-            true,
-            "success",
-            `berhasil hapus user ${res.data.data.delete_User}`
-          )
-        );
-
-        dispatch(fetchUsers());
-      }
+    setForm({
+      ...form,
+      name: res.data.data.getAll_users.name,
+      email: res.data.data.getAll_users.email,
     });
   };
 
+  useEffect(() => {
+    fetchOneUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = async (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    const payload = {
+      name: form.name,
+      email: form.email,
+    };
+
+    const res = await putData(`/user/${id}`, payload);
+
+    if (res.data.data.update_User) {
+      dispatch(setNotif(true, "success", "berhasil ubah profile user"));
+      navigate("/");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
+  };
+
   return (
-    <Container>
-      {notif.status && (
-        <SAlert type={notif.typeNotif} message={notif.message} />
-      )}
-      <Table
-        status={users.status}
-        thead={[
-          "nama",
-          "email",
-          "Departement",
-          "Group",
-          "Role",,
-          "Aksi",
-        ]}
-        data={users.data}
-        tbody={[
-          "name",
-          "email",
-          "Departement",
-          "Group",
-          "roles",
-        ]}
-        editUrl={`/update-user`}
-        deleteAction={(id) => handleDelete(id)}
-        withoutPagination
-      />
+    <Container md={12}>
+      <div className="m-auto" style={{ width: "50%" }}>
+        {alert.status && <SAlert type={alert.type} message={alert.message} />}
+      </div>
+      <Card style={{ width: "60%" }} className="m-auto mt-5">
+        <Card.Body>
+          <Card.Title className="text-center">Setting Profile</Card.Title>
+          <SettingInput />
+        </Card.Body>
+      </Card>
     </Container>
   );
-}
+};
 
-export default SettingPage;
+export default SettingsPage;

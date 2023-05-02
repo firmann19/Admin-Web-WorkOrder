@@ -2,6 +2,8 @@ import {
   START_FETCHING_USERS,
   SUCCESS_FETCHING_USERS,
   ERROR_FETCHING_USERS,
+  SET_DEPARTEMENT,
+  SET_GROUP,
 } from "./constants";
 
 import { getData } from "../../utils/fetch";
@@ -42,11 +44,25 @@ export const fetchUsers = () => {
 
       dispatch(
         successFetchingUsers({
-          events: res.data.data.getAll_users,
+          users: res.data.data.getAll_users,
         })
       );
     } catch (error) {
       dispatch(errorFetchingUsers());
     }
+  };
+};
+
+export const setDepartement = (departement) => {
+  return {
+    type: SET_DEPARTEMENT,
+    departement,
+  };
+};
+
+export const setGroup = (group) => {
+  return {
+    type: SET_GROUP,
+    group,
   };
 };

@@ -6,20 +6,20 @@ const sidebarNav = [
         text: 'Dashboard'
     },
     {
-        link: '/work-order',
-        section: 'work-order',
+        link: '/work-order-page',
+        section: 'work-order-page',
         icon: <i className='bx bx-receipt' ></i>,
         text: 'Work Order'
     },
     {
-        link: '/register-user',
-        section: 'register-user',
+        link: '/register-page',
+        section: 'register-page',
         icon: <i className='bx bx-user'></i>,
         text: 'Register User'
     },
     {
         link: '/settings-page',
-        section: 'settings',
+        section: 'settings-page',
         icon: <i className='bx bx-cog'></i>,
         text: 'Settings'
     }

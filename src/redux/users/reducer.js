@@ -2,6 +2,8 @@ import {
   START_FETCHING_USERS,
   SUCCESS_FETCHING_USERS,
   ERROR_FETCHING_USERS,
+  SET_DEPARTEMENT,
+  SET_GROUP,
 } from "./constants";
 
 const statuslist = {
@@ -29,6 +31,17 @@ export default function reducer(state = initialState, action) {
         ...state,
         status: statuslist.success,
         data: action.users,
+      };
+    case SET_DEPARTEMENT:
+      return {
+        ...state,
+        departement: action.departement,
+      };
+
+    case SET_GROUP:
+      return {
+        ...state,
+        group: action.group,
       };
 
     default:

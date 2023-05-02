@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postData } from "../../utils/fetch";
 import RegisterInput from "../../components/Register-Input/RegisterInput";
+import BreadCrumb from "../../components/Breadcrumb"
 import {
   fetchListsDepartement,
   fetchListsGroup,
@@ -11,7 +12,7 @@ import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 
-const RegisterUserPage = () => {
+const CreateUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lists = useSelector((state) => state.lists);
@@ -100,6 +101,11 @@ const RegisterUserPage = () => {
 
   return (
     <Container md={12}>
+    <BreadCrumb
+        textSecound={"User"}
+        urlSecound={"/register-page"}
+        textThird="Create"
+      />
       <div className="m-auto" style={{ width: "50%" }}>
         {alert.status && <SAlert type={alert.type} message={alert.message} />}
       </div>
@@ -120,4 +126,4 @@ const RegisterUserPage = () => {
   );
 };
 
-export default RegisterUserPage;
+export default CreateUser;
