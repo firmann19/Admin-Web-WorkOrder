@@ -13,13 +13,13 @@ import {
 } from "../../redux/lists/actions";
 import Swal from "sweetalert2";
 import { deleteData } from "../../utils/fetch";
-import { setNotif } from "../../redux/notif/actions";
 import {
   fetchUsers,
   setDepartement,
   setGroup,
 } from "../../redux/users/actions";
 import SAlert from "../../components/Alert";
+import { toast } from "react-toastify";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -55,15 +55,12 @@ function RegisterPage() {
       cancelButtonText: "Batal",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await deleteData(`/user/${id}`);
-
-        dispatch(
-          setNotif(
-            true,
-            "success",
-            `berhasil hapus user ${res.data.data.getAll_users.name}`
-          )
-        );
+        await deleteData(`/user/${id}`).then((res) => {
+          if (res.data.status === true) {
+            toast.success(res.data.message);
+            navigate("/register-page");
+          }
+        });
         dispatch(fetchUsers());
       }
     });
@@ -76,10 +73,11 @@ function RegisterPage() {
       </Button>
       <BreadCrumb textSecound={"User"} />
       <Row>
-        <Col>
-          <SearchInput name="keyword" query={""} handleChange={""} />
+      <Col>
+          <SearchInput
+            
+          />
         </Col>
-
         <Col>
           <SelectBox
             placeholder={"Masukan pencarian Departement"}
@@ -106,10 +104,10 @@ function RegisterPage() {
 
       <Table
         status={user.status}
-        thead={["Nama", "Email", "Posisi", "Departement", "Group", "Aksi"]}
+        thead={["Nama", "Email", "Posisi", "Role", "Departement", "Group", "Aksi"]}
         data={user.data}
-        tbody={["name", "email", "posisi", "DepartementId", "GroupId", "Aksi"]}
-        editUrl={`/user/edit`}
+        tbody={["name", "email", "posisi", "roles", "DepartementId", "GroupId", "Aksi"]}
+        editUrl={`/register-page/edit-user`}
         deleteAction={(id) => handleDelete(id)}
         withoutPagination
       />
