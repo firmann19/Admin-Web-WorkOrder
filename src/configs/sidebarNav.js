@@ -18,7 +18,7 @@ const sidebarNav = [
         text: 'Register User'
     },
     {
-        link: '/settings',
+        link: '/settings-page',
         section: 'settings',
         icon: <i className='bx bx-cog'></i>,
         text: 'Settings'

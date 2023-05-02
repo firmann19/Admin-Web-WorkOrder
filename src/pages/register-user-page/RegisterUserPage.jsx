@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postData } from "../../utils/fetch";
-import { setNotif } from "../../redux/notif/actions";
 import RegisterInput from "../../components/Register-Input/RegisterInput";
 import {
   fetchListsDepartement,
@@ -10,6 +9,7 @@ import {
 } from "../../redux/lists/actions";
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
+import { toast } from "react-toastify";
 
 const RegisterUserPage = () => {
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ const RegisterUserPage = () => {
     password: "",
     roles: "",
     posisi: "",
-    DepartementId: "",
-    GroupId: "",
+    DepartementId: 0,
+    GroupId: 0,
   });
 
   const [alert, setAlert] = useState({
@@ -43,6 +43,7 @@ const RegisterUserPage = () => {
       setForm({ ...form, [e.target.name]: e });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
+      console.log(e.target.value);
     }
   };
 
@@ -59,27 +60,42 @@ const RegisterUserPage = () => {
       GroupId: form.GroupId.value,
     };
 
-    const res = await postData("/auth/signup", payload);
+    await postData(`/auth/signup`, payload)
+      .then((res) => {
+        if (res.data.status === true) {
+          toast.success(res.data.message);
+          navigate("/");
+          setIsLoading(false);
+        } else {
+          setIsLoading(true);
+          alert({
+            status: false,
+            type: "danger",
+            message: "gagal",
+          });
+        }
+      })
+      .catch((err) => console.log("ini errror", err));
 
-    if (res.data.data.registered_user) {
-      dispatch(
-        setNotif(
-          true,
-          "success",
-          `Register telah dibuat oleh ${res.data.data.name}`
-        )
-      );
-      navigate("/work-order");
-      setIsLoading(false);
-    } else {
-      setIsLoading(false);
-      setAlert({
-        ...alert,
-        status: true,
-        type: "danger",
-        message: "Register Gagal",
-      });
-    }
+    // if (res?.data?.data?.registered_user) {
+    //   dispatch(
+    //     setNotif(
+    //       true,
+    //       "success",
+    //       `Register Berhasil`
+    //     )
+    //   );
+    //   navigate("/");
+    //   setIsLoading(false);
+    // } else {
+    //   setIsLoading(false);
+    //   setAlert({
+    //     ...alert,
+    //     status: true,
+    //     type: "danger",
+    //     message: "Register Gagal",
+    //   });
+    // }
   };
 
   return (

@@ -11,6 +11,7 @@ export async function postData(url, payload, formData) {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": formData ? "multipart/form-data" : "application/json",
+        method: "POST"
       },
     });
   } catch (error) {

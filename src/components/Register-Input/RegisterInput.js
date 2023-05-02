@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import SButton from "../Button";
 import SelectBox from "../selectBox";
 import { Col, Form, Row } from "react-bootstrap";
@@ -7,7 +6,7 @@ import TextInputWithLabel from "../TextInputWithLabel";
 
 function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
   return (
-    <Form className="form-register">
+    <Form method="post" className="form-register">
       <TextInputWithLabel
         placeholder={"Masukan nama..."}
         label={"Nama"}
@@ -15,7 +14,7 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
         value={form?.name}
         type="text"
         onChange={handleChange}
-      />
+   />
 
       <TextInputWithLabel
         placeholder={"Masukan email"}
@@ -33,7 +32,7 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
             placeholder={"Pilih group anda..."}
             name="Group"
             isClearable={true}
-            value={form.group}
+            value={form.GroupId}
             options={lists.groups}
             handleChange={(e) => handleChange(e)}
           />
@@ -45,12 +44,21 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
             placeholder={"Pilih departement anda..."}
             name="Departement"
             isClearable={true}
-            value={form.departement}
+            value={form.DepartementId}
             options={lists.departements}
             handleChange={(e) => handleChange(e)}
           />
         </Col>
       </Row>
+
+      <TextInputWithLabel
+        placeholder={"Masukan Posisi..."}
+        label={"Posisi"}
+        name="posisi"
+        value={form?.posisi}
+        type="text"
+        onChange={handleChange}
+      />
 
       <TextInputWithLabel
         placeholder={"Masukan Role..."}
@@ -70,7 +78,6 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
         onChange={handleChange}
       />
       <div className="mx-auto w-25 mt-5">
-        <Link to="/complete-order">
           <SButton
             className="w-100"
             loading={isLoading}
@@ -80,7 +87,6 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
           >
             Submit
           </SButton>
-        </Link>
       </div>
     </Form>
   );

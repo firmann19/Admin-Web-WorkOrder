@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+/* eslint-disable no-sparse-arrays */
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { fetchUsers } from "../../redux/users/actions";
 import Swal from "sweetalert2";
-import { deleteData, putData } from "../../utils/fetch";
+import { deleteData } from "../../utils/fetch";
 import { setNotif } from "../../redux/notif/actions";
 import { Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
+import Table from "../../components/TableWithAction"
 
 function SettingPage() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const notif = useSelector((state) => state.notif);

@@ -9,6 +9,11 @@ import MainLayout from "./layout/MainLayout";
 import { useEffect } from "react";
 import { listen } from "./redux/listener";
 import LoginPage from "./pages/LoginPage";
+import SettingPage from "./pages/settings-page";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import RegisterPage from "./pages/register-user-page";
+
 
 function App() {
   useEffect(() => {
@@ -16,6 +21,8 @@ function App() {
   }, []);
 
   return (
+    <>
+    <ToastContainer />
     <Routes>
       <Route path="/login-page" element={<LoginPage />} />
       {/* <Route> */}
@@ -23,10 +30,12 @@ function App() {
         <Route index element={<Dashboard />} />
         {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
         <Route path="/work-order" element={<WorkOrderPage />} />
-        <Route path="/register-user" element={<RegisterUserPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/register-user" element={<RegisterPage />} />
+        <Route path="/settings-page" element={<SettingPage />} />
       </Route>
     </Routes>
+    </>
+
   );
 }
 

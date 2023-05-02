@@ -51,7 +51,7 @@ export const fetchListsDepartement = () => {
         _temp.push({
           value: res.id,
           label: res.nama,
-          target: { value: res._id, name: "departement" },
+          target: { value: res.id, name: "DepartementId" },
         });
       });
 
@@ -100,7 +100,7 @@ export const fetchListsGroup = () => {
         _temp.push({
           value: res.id,
           label: res.nama,
-          target: { value: res.GroupId, name: "group" },
+          target: { value: res.id, name: "GroupId" },
         });
       });
 

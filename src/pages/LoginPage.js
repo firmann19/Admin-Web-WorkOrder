@@ -8,10 +8,21 @@ import { userLogin } from "../redux/auth/actions";
 import { postData } from "../utils/fetch";
 import { Card, Container } from "react-bootstrap";
 
+// import { useEffect } from "react";
+// import { authReducer } from "../redux/auth/reducer";
+// import { USER_LOGIN } from "../redux/auth/constants";
+
 function LoginPage() {
   const dispatch = useDispatch();
-
+  // const [ user ] =  USER_LOGIN (authReducer);
   const navigate = useNavigate();
+
+  // gigih
+  // useEffect (() => {
+  //   if (!user) {
+  //     Navigate("/login-page")
+  //   }
+  // })
 
   const [form, setForm] = useState({
     email: "",
