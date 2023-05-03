@@ -19,7 +19,7 @@ function TableWithAction({
 }) {
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered variant="light" hover>
         <Thead text={thead} />
         <Tbody
           status={status}

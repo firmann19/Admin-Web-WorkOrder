@@ -13,6 +13,13 @@ import WorkOrderPage from "../src/pages/work-order-page";
 import RegisterPage from "../src/pages/register-user-page";
 import SettingsPage from "../src/pages/settings-page";
 import CreateUser from "./pages/register-user-page/Create";
+import EditUser from "./pages/register-user-page/edit";
+import DepartementPage from "./pages/Departement-Page";
+import CreateDepartement from "./pages/Departement-Page/create";
+import EditDepartement from "./pages/Departement-Page/edit";
+import GroupPage from "./pages/Group-Page";
+import CreateGroup from "./pages/Group-Page/create";
+import EditGroup from "./pages/Group-Page/edit";
 
 function App() {
   useEffect(() => {
@@ -31,6 +38,13 @@ function App() {
           <Route path="/register-page" element={<RegisterPage />} />
           <Route path="/settings-page" element={<SettingsPage />} />
           <Route path="/register-page/create-user" element={<CreateUser />} />
+          <Route path="/register-page/edit-user/:id" element={<EditUser />} />
+          <Route path="/departement-page" element={<DepartementPage />}/>
+          <Route path="/departement-page/create-departement" element={<CreateDepartement />}/>
+          <Route path="/departement-page/edit-departement/:id" element={<EditDepartement />}/>
+          <Route path="/group-page" element={<GroupPage />}/>
+          <Route path="/group-page/create-group" element={<CreateGroup />}/>
+          <Route path="/group-page/edit-group/:id" element={<EditGroup />}/>
         </Route>
        
       </Routes>

@@ -10,6 +10,8 @@ import authReducer from "./auth/reducer";
 import listsReducer from "./lists/reducer";
 import notifReducer from "./notif/reducer";
 import userReducer from "./users/reducer";
+import departementsReducer from "./departements/reducer"
+import groupsReducer from "./groups/reducer"
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -18,6 +20,8 @@ const rootReducers = combineReducers({
   lists: listsReducer,
   notif: notifReducer,
   user: userReducer,
+  departements : departementsReducer,
+  groups: groupsReducer
 });
 const store = createStore(
   rootReducers,

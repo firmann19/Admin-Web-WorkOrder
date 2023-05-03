@@ -18,11 +18,17 @@ const sidebarNav = [
         text: 'Register User'
     },
     {
-        link: '/settings-page',
-        section: 'settings-page',
-        icon: <i className='bx bx-cog'></i>,
-        text: 'Settings'
-    }
+        link: '/departement-page',
+        section: 'departement-page',
+        icon: <i className='bx bx-cabinet'></i>,
+        text: 'Departement'
+    },
+    {
+        link: '/group-page',
+        section: 'group-page',
+        icon: <i class='bx bx-dialpad'></i>,
+        text: 'Group'
+    },
 ]
 
 export default sidebarNav

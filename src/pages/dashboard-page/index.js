@@ -14,7 +14,6 @@ import {
     Tooltip,
     Legend
 } from 'chart.js'
-import NavbarItem from '../../components/navbar'
 
 ChartJS.register(
     CategoryScale,
