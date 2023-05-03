@@ -12,6 +12,7 @@ import notifReducer from "./notif/reducer";
 import userReducer from "./users/reducer";
 import departementsReducer from "./departements/reducer"
 import groupsReducer from "./groups/reducer"
+import checkoutReducer from "./checkouts/reducer"
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const rootReducers = combineReducers({
   notif: notifReducer,
   user: userReducer,
   departements : departementsReducer,
-  groups: groupsReducer
+  groups: groupsReducer,
+  checkouts: checkoutReducer
 });
 const store = createStore(
   rootReducers,

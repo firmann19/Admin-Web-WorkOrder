@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "../../components/Button";
 import SelectBox from "../../components/selectBox";
@@ -7,37 +7,21 @@ import Table from "../../components/TableWithAction";
 import SearchInput from "../../components/SearchInput";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchListsDepartement,
-  fetchListsGroup,
-} from "../../redux/lists/actions";
 import Swal from "sweetalert2";
 import { deleteData } from "../../utils/fetch";
-import {
-  fetchUsers,
-  setDepartement,
-  setGroup,
-} from "../../redux/users/actions";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
+import { fetchCheckouts } from "../../redux/checkouts/actions";
 
 function WorkOrderPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const notif = useSelector((state) => state.notif);
-  const checkout = useSelector((state) => state.checkout);
-  const lists = useSelector((state) => state.lists);
-
-  useEffect(
-    () => {
-      dispatch(fetchUsers());
-    },
-    [dispatch],
-  );
+  const checkouts = useSelector((state) => state.checkouts);
 
   useEffect(() => {
-    dispatch(fetchListsDepartement());
+    dispatch(fetchCheckouts());
   }, [dispatch]);
 
   const handleDelete = (id) => {
@@ -58,7 +42,7 @@ function WorkOrderPage() {
             navigate("/register-page");
           }
         });
-        dispatch(fetchUsers());
+        dispatch(fetchCheckouts());
       }
     });
   };
@@ -82,27 +66,24 @@ function WorkOrderPage() {
       </Row>
 
       <Table
-        status={""}
+        status={checkouts.status}
         thead={[
           "Nama",
-          "Departement",
           "Nama Peralatan",
           "Kode Peralatan",
           "Permasalahan",
           "Aksi",
         ]}
-        data={""}
+        data={checkouts.data}
         tbody={[
-          "name",
-          "email",
-          "posisi",
-          "roles",
-          "DepartementId",
-          "GroupId",
+          "namaBarang",
+          "kodeBarang",
+          "permasalahan",
+          "UserRequestId",
           "Aksi",
         ]}
-        editUrl={`/register-page/edit-user`}
-        deleteAction={""}
+        editUrl={`/checkout-page/edit-wo`}
+        deleteAction={(id) => handleDelete(id)}
         withoutPagination
       />
     </Container>
