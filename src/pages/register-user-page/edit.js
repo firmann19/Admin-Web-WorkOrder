@@ -38,8 +38,6 @@ function EditUser() {
 
   const fetchOneUsers = async () => {
     const res = await getData(`/user/${id}`);
-    console.log(res)
-    console.log("res")
 
     setForm({
       ...form,
@@ -97,8 +95,6 @@ function EditUser() {
       GroupId: form.GroupId.value,
     };
 
-    console.log(payload)
-    console.log("payload")
 
     await putData(`/user/${id}`, payload)
       .then((res) => {

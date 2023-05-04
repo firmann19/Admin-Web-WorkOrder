@@ -8,10 +8,9 @@ import SearchInput from "../../components/SearchInput";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { deleteData } from "../../utils/fetch";
-import SAlert from "../../components/Alert";
-import { toast } from "react-toastify";
+import { putData } from "../../utils/fetch";
 import { fetchCheckouts } from "../../redux/checkouts/actions";
+import { setNotif } from "../../redux/notif/actions";
 
 function WorkOrderPage() {
   const navigate = useNavigate();
@@ -24,28 +23,36 @@ function WorkOrderPage() {
     dispatch(fetchCheckouts());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
+  const handleChangeStatus = (id, status) => {
     Swal.fire({
       title: "Apa kamu yakin?",
-      text: "Anda tidak akan dapat mengembalikan ini!",
+      text: "",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Iya, Hapus",
+      confirmButtonText: "Iya, Ubah Status",
       cancelButtonText: "Batal",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteData(`/user/${id}`).then((res) => {
-          if (res.data.status === true) {
-            toast.success(res.data.message);
-            navigate("/register-page");
-          }
-        });
+        const payload = {
+          StatusWO: status === "Close" ? "Pending" : "Close",
+        };
+        const res = await putData(`/StatusWO/${id}`, payload);
+
+        dispatch(
+          setNotif(
+            true,
+            "success",
+            `berhasil ubah status event ${res.data.data.title}`
+          )
+        );
+
         dispatch(fetchCheckouts());
       }
     });
   };
+
 
   return (
     <Container className="mt-3">
@@ -72,6 +79,7 @@ function WorkOrderPage() {
           "Nama Peralatan",
           "Kode Peralatan",
           "Permasalahan",
+          "Status",
           "Aksi",
         ]}
         data={checkouts.data}
@@ -80,10 +88,22 @@ function WorkOrderPage() {
           "kodeBarang",
           "permasalahan",
           "UserRequestId",
+          "StatusWO",
           "Aksi",
         ]}
-        editUrl={`/checkout-page/edit-wo`}
-        deleteAction={(id) => handleDelete(id)}
+        confirmationUrl={`/work-order-page/confirmation-wo`}
+        customAction={(id, status = "") => {
+          return (
+            <Button
+              className={"mx-2"}
+              variant="primary"
+              size={"sm"}
+              action={() => handleChangeStatus(id, status)}
+            >
+              Change Status
+            </Button>
+          );
+        }}
         withoutPagination
       />
     </Container>

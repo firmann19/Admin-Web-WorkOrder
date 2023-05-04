@@ -10,6 +10,8 @@ function TbodyWithAction({
   editUrl,
   deleteAction,
   actionNotDisplay,
+  customAction,
+  confirmationUrl,
   status,
 }) {
   const navigate = useNavigate();
@@ -41,6 +43,7 @@ function TbodyWithAction({
               )}
               {!actionNotDisplay && (
                 <td>
+                   {customAction && customAction(data.id, data.StatusWO)}
                   {editUrl && (
                     <Button
                       variant="success"
@@ -48,6 +51,15 @@ function TbodyWithAction({
                       action={() => navigate(`${editUrl}/${data.id}`)}
                     >
                       Edit
+                    </Button>
+                  )}
+                   {confirmationUrl && (
+                    <Button
+                      variant="secondary"
+                      size={"sm"}
+                      action={() => navigate(`${confirmationUrl}/${data.id}`)}
+                    >
+                      Confirmation
                     </Button>
                   )}
                   {deleteAction && (

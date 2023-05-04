@@ -20,6 +20,7 @@ import EditDepartement from "./pages/Departement-Page/edit";
 import GroupPage from "./pages/Group-Page";
 import CreateGroup from "./pages/Group-Page/create";
 import EditGroup from "./pages/Group-Page/edit";
+import ConfirmationWO from "./pages/work-order-page/Confirmation";
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="/work-order-page" element={<WorkOrderPage />} />
+          <Route path="/work-order-page/confirmation-wo/:id" element={<ConfirmationWO />}/>
           <Route path="/register-page" element={<RegisterPage />} />
           <Route path="/settings-page" element={<SettingsPage />} />
           <Route path="/register-page/create-user" element={<CreateUser />} />
