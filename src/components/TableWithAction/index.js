@@ -15,6 +15,7 @@ function TableWithAction({
   deleteAction,
   customAction,
   confirmationUrl,
+  Detail,
   status,
   pages,
 }) {
@@ -31,6 +32,7 @@ function TableWithAction({
           actionNotDisplay={actionNotDisplay}
           customAction={customAction}
           confirmationUrl={confirmationUrl}
+          Detail={Detail}
         />
       </Table>
       {!withoutPagination && data.length ? (

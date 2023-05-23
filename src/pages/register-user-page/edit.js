@@ -10,8 +10,9 @@ import { getData, putData } from "../../utils/fetch";
 import { toast } from "react-toastify";
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
-import BreadCrumb from "../../components/Breadcrumb"
+import BreadCrumb from "../../components/Breadcrumb";
 import EditUserInput from "../../components/EditUser-Input/EditUserInput";
+import Navbar from "../../components/navbar";
 
 function EditUser() {
   const navigate = useNavigate();
@@ -66,12 +67,12 @@ function EditUser() {
 
   useEffect(() => {
     fetchOneUsers();
-  }, [])
+  }, []);
 
   useEffect(() => {
     dispatch(fetchListsDepartement());
-    dispatch(fetchListsGroup())
-  }, [dispatch])
+    dispatch(fetchListsGroup());
+  }, [dispatch]);
 
   const handleChange = async (e) => {
     if (e.target.name === "DepartementId" || e.target.name === "GroupId") {
@@ -95,7 +96,6 @@ function EditUser() {
       GroupId: form.GroupId.value,
     };
 
-
     await putData(`/user/${id}`, payload)
       .then((res) => {
         if (res.data.status === true) {
@@ -117,29 +117,32 @@ function EditUser() {
   };
 
   return (
-    <Container md={12}>
-      <BreadCrumb
-        textSecound={"User"}
-        urlSecound={"/register-page"}
-        textThird="Edit"
-      />
-      <div className="m-auto" style={{ width: "50%" }}>
-        {alert.status && <SAlert type={alert.type} message={alert.message} />}
-      </div>
-      <Card style={{ width: "60%" }} className="m-auto mt-5">
-        <Card.Body>
-          <Card.Title className="text-center">Form Update</Card.Title>
-          <p className="text-center">Please update user data </p>
-          <EditUserInput
-            form={form}
-            isLoading={isLoading}
-            lists={lists}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-        </Card.Body>
-      </Card>
-    </Container>
+    <>
+      <Navbar />
+      <Container md={12}>
+        <BreadCrumb
+          textSecound={"User"}
+          urlSecound={"/register-page"}
+          textThird="Edit"
+        />
+        <div className="m-auto" style={{ width: "50%" }}>
+          {alert.status && <SAlert type={alert.type} message={alert.message} />}
+        </div>
+        <Card style={{ width: "60%" }} className="m-auto mt-5">
+          <Card.Body>
+            <Card.Title className="text-center">Form Update</Card.Title>
+            <p className="text-center">Please update user data </p>
+            <EditUserInput
+              form={form}
+              isLoading={isLoading}
+              lists={lists}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          </Card.Body>
+        </Card>
+      </Container>
+    </>
   );
 }
 

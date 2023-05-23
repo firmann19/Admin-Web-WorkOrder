@@ -4,18 +4,18 @@ import { getData } from "../../utils/fetch";
 import {
   ERROR_FETCHING_LISTS_DEPARTEMENT,
   ERROR_FETCHING_LISTS_GROUP,
-  ERROR_FETCHING_LISTS_USER,
+  ERROR_FETCHING_LISTS_HeadIT,
   START_FETCHING_LISTS_DEPARTEMENT,
   START_FETCHING_LISTS_GROUP,
-  START_FETCHING_LISTS_USER,
+  START_FETCHING_LISTS_HeadIT,
   SUCCESS_FETCHING_LISTS_DEPARTEMENT,
   SUCCESS_FETCHING_LISTS_GROUP,
-  SUCCESS_FETCHING_LISTS_USER,
+  SUCCESS_FETCHING_LISTS_HeadIT,
 } from "./constants";
 
 let debouncedFetchListsDepartement = debounce(getData, 1000);
 let debouncedFetchListsGroup = debounce(getData, 1000);
-let debouncedFetchListsUser = debounce(getData, 1000);
+let debouncedFetchListsHeadIT = debounce(getData, 1000);
 
 // Departement
 
@@ -113,49 +113,49 @@ export const fetchListsGroup = () => {
 
 // User
 
-export const startFetchingListsUser = () => {
+export const startFetchingListsHeadIT = () => {
   return {
-    type: START_FETCHING_LISTS_USER,
+    type: START_FETCHING_LISTS_HeadIT,
   };
 };
 
-export const successFetchingListsUser = ({ users }) => {
+export const successFetchingListsHeadIT = ({ HeadIT }) => {
   return {
-    type: SUCCESS_FETCHING_LISTS_USER,
-    users,
+    type: SUCCESS_FETCHING_LISTS_HeadIT,
+    HeadIT,
   };
 };
 
-export const errorFetchingListsUser = () => {
+export const errorFetchingListsHeadIT = () => {
   return {
-    type: ERROR_FETCHING_LISTS_USER,
+    type: ERROR_FETCHING_LISTS_HeadIT,
   };
 };
 
-export const fetchListsUser = () => {
+export const fetchListsHeadIT = () => {
   return async (dispatch) => {
-    dispatch(startFetchingListsUser());
+    dispatch(startFetchingListsHeadIT());
 
     try {
-      let res = await debouncedFetchListsUser("/user");
+      let res = await debouncedFetchListsHeadIT("/getAllApprove");
 
       let _temp = [];
 
-      res.data.data.getAll_users.forEach((res) => {
+      res.data.data.getAllApprove_users.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.name,
-          target: {value: res.id, name: "user"}
+          target: {value: res.id, name: "HeadITid"}
         });
       });
 
       dispatch(
-        successFetchingListsUser({
-          users: _temp,
+        successFetchingListsHeadIT({
+          HeadIT: _temp,
         })
       );
     } catch (error) {
-      dispatch(errorFetchingListsUser());
+      dispatch(errorFetchingListsHeadIT());
     }
   };
 };

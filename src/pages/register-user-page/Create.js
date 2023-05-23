@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postData } from "../../utils/fetch";
 import RegisterInput from "../../components/Register-Input/RegisterInput";
-import BreadCrumb from "../../components/Breadcrumb"
+import BreadCrumb from "../../components/Breadcrumb";
 import {
   fetchListsDepartement,
   fetchListsGroup,
@@ -11,6 +11,7 @@ import {
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
+import Navbar from "../../components/navbar";
 
 const CreateUser = () => {
   const navigate = useNavigate();
@@ -80,29 +81,32 @@ const CreateUser = () => {
   };
 
   return (
-    <Container md={12}>
-    <BreadCrumb
-        textSecound={"User"}
-        urlSecound={"/register-page"}
-        textThird="Create"
-      />
-      <div className="m-auto" style={{ width: "50%" }}>
-        {alert.status && <SAlert type={alert.type} message={alert.message} />}
-      </div>
-      <Card style={{ width: "60%" }} className="m-auto mt-5">
-        <Card.Body>
-          <Card.Title className="text-center">Form Signup</Card.Title>
-          <p className="text-center">Create your account</p>
-          <RegisterInput
-            form={form}
-            isLoading={isLoading}
-            lists={lists}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-        </Card.Body>
-      </Card>
-    </Container>
+    <>
+      <Navbar />
+      <Container md={12}>
+        <BreadCrumb
+          textSecound={"User"}
+          urlSecound={"/register-page"}
+          textThird="Create"
+        />
+        <div className="m-auto" style={{ width: "50%" }}>
+          {alert.status && <SAlert type={alert.type} message={alert.message} />}
+        </div>
+        <Card style={{ width: "60%" }} className="m-auto mt-5">
+          <Card.Body>
+            <Card.Title className="text-center">Form Signup</Card.Title>
+            <p className="text-center">Create your account</p>
+            <RegisterInput
+              form={form}
+              isLoading={isLoading}
+              lists={lists}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          </Card.Body>
+        </Card>
+      </Container>
+    </>
   );
 };
 

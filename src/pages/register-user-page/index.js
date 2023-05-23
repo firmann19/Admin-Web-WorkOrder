@@ -20,6 +20,7 @@ import {
 } from "../../redux/users/actions";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
+import Navbar from "../../components/navbar";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function RegisterPage() {
   const notif = useSelector((state) => state.notif);
   const user = useSelector((state) => state.user);
   const lists = useSelector((state) => state.lists);
+
 
   useEffect(
     () => {
@@ -67,6 +69,8 @@ function RegisterPage() {
   };
 
   return (
+    <>
+    <Navbar />
     <Container className="mt-3">
       <Button action={() => navigate("/register-page/create-user")}>
         Tambah
@@ -104,14 +108,15 @@ function RegisterPage() {
 
       <Table
         status={user.status}
-        thead={["Nama", "Email", "Posisi", "Role", "Departement", "Group", "Aksi"]}
+        thead={["Nama", "Email", "Posisi",  "Departement", "Group", "Role", "Aksi"]}
         data={user.data}
-        tbody={["name", "email", "posisi", "roles", "DepartementId", "GroupId", "Aksi"]}
+        tbody={["name", "email", "posisi",  "DepartementId", "GroupId", "roles", "Aksi"]}
         editUrl={`/register-page/edit-user`}
         deleteAction={(id) => handleDelete(id)}
         withoutPagination
       />
     </Container>
+    </>
   );
 }
 

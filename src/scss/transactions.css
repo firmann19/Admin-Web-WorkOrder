@@ -1,12 +1,12 @@
 
 .transactions, .checkout {
-    background-color: #e4e7ea;
+    background-color: #eff2f8;
 }
 
 .transactions main.main-wrapper{
-    margin-left: 340px;
+    margin-left: 40px;
     height: 100%;
-    margin-right: auto;
+    margin-right: 40px;
     position: relative;
     padding: 50px 50px 50px 0px;
 }

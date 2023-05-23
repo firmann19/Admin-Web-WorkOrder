@@ -12,6 +12,7 @@ function TbodyWithAction({
   actionNotDisplay,
   customAction,
   confirmationUrl,
+  Detail,
   status,
 }) {
   const navigate = useNavigate();
@@ -60,6 +61,16 @@ function TbodyWithAction({
                       action={() => navigate(`${confirmationUrl}/${data.id}`)}
                     >
                       Confirmation
+                    </Button>
+                  )}
+                   {Detail && (
+                    <Button
+                      variant="info"
+                      size={"sm"}
+                      className={"ms-2"}
+                      action={() => navigate(`${Detail}/${data.id}`)}
+                    >
+                    Detail
                     </Button>
                   )}
                   {deleteAction && (

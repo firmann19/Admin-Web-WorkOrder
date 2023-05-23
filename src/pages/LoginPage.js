@@ -50,6 +50,7 @@ function LoginPage() {
         userLogin(
           res.data.data.token,
           res.data.data.user,
+          res.data.data.role
         )
       );
 

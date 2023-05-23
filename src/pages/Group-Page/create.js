@@ -6,6 +6,7 @@ import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import GroupInput from "../../components/Group-Input/GroupInput";
+import Navbar from "../../components/navbar";
 
 function CreateGroup() {
   const navigate = useNavigate();
@@ -51,10 +52,12 @@ function CreateGroup() {
   };
 
   return (
+    <>
+    <Navbar />
     <Container md={12}>
       <BreadCrumb
-        textSecound={"Departement"}
-        urlSecound={"/departement-page"}
+        textSecound={"Group"}
+        urlSecound={"/group-page"}
         textThird="Create"
       />
       <div className="m-auto" style={{ width: "50%" }}>
@@ -73,6 +76,7 @@ function CreateGroup() {
         </Card.Body>
       </Card>
     </Container>
+    </>
   );
 }
 

@@ -12,9 +12,9 @@ export const SUCCESS_FETCHING_LISTS_GROUP =
 export const ERROR_FETCHING_LISTS_GROUP =
   "redux/lists/ERROR_FETCHING_LISTS_GROUP";
 
-export const START_FETCHING_LISTS_USER =
-  "redux/lists/START_FETCHING_LISTS_USER";
-export const SUCCESS_FETCHING_LISTS_USER =
-  "redux/lists/SUCCESS_FETCHING_LISTS_USER";
-export const ERROR_FETCHING_LISTS_USER =
-  "redux/lists/ERROR_FETCHING_LISTS_USER";
+export const START_FETCHING_LISTS_HeadIT =
+  "redux/lists/START_FETCHING_LISTS_HeadIT";
+export const SUCCESS_FETCHING_LISTS_HeadIT =
+  "redux/lists/SUCCESS_FETCHING_LISTS_HeadIT";
+export const ERROR_FETCHING_LISTS_HeadIT =
+  "redux/lists/ERROR_FETCHING_LISTS_HeadIT";

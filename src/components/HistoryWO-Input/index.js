@@ -4,7 +4,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import TextInputWithLabel from "../TextInputWithLabel";
 import SelectBox from "../selectBox";
 
-function ConfirmWOInput({
+function HistoryWOInput({
   form,
   lists,
   handleChange,
@@ -196,4 +196,4 @@ function ConfirmWOInput({
   );
 }
 
-export default ConfirmWOInput;
+export default HistoryWOInput;

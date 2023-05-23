@@ -11,24 +11,26 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListsHeadIT } from "../../redux/lists/actions";
-import Navbar from "../../components/navbar";
 
-function ConfirmationWO() {
-  const navigate = useNavigate();
+function HistoryWO() {
   const dispatch = useDispatch();
   const lists = useSelector((state) => state.lists);
   const { id } = useParams();
   const [form, setForm] = useState({
     namaBarang: "",
     kodeBarang: "",
-    DepartUserId: 0,
     permasalahan: "",
     tindakan: "",
     gantiSparepart: "",
     UserRequestId: 0,
+    DepartUserId: 0,
     UserApproveId: 0,
-    UserITid: "",
+    StatusWO: "",
+    date_requestWO: "",
+    StatusPengerjaan: "",
     HeadITid: 0,
+    UserIT: "",
+    date_completionWO: "",
   });
 
   const [alert, setAlert] = useState({
@@ -42,6 +44,8 @@ function ConfirmationWO() {
   const fetchOneGroup = async () => {
     const res = await getData(`/checkout/${id}`);
 
+    const resReport = await getData(`/checkoutReport/${id}`);
+
     setForm({
       ...form,
       namaBarang: res.data.data.getCheckout_ById.namaBarang,
@@ -50,6 +54,21 @@ function ConfirmationWO() {
       UserRequestId: res.data.data.getCheckout_ById.UserRequestId,
       UserApproveId: res.data.data.getCheckout_ById.UserApproveId,
       DepartUserId: res.data.data.getCheckout_ById.DepartUserId,
+      namaBarang: res.data.data.getCheckout_ById.namaBarang,
+      kodeBarang: res.data.data.getCheckout_ById.kodeBarang,
+      permasalahan: res.data.data.getCheckout_ById.permasalahan,
+      tindakan: resReport.data.data.getAllReport_ById.tindakan,
+      gantiSparepart: resReport.data.data.getAllReport_ById.gantiSparepart,
+      UserRequestId: res.data.data.getCheckout_ById.UserRequestId,
+      DepartUserId: res.data.data.getCheckout_ById.DepartUserId,
+      UserApproveId: res.data.data.getCheckout_ById.UserApproveId,
+      StatusWO: res.data.data.getCheckout_ById.StatusWO,
+      date_requestWO: res.data.getCheckout_ById.date_requestWO,
+      StatusPengerjaan: resReport.data.data.getAllReport_ById.StatusPengerjaan,
+      HeadITid: resReport.data.data.getAllReport_ById.HeadITid,
+      UserIT: resReport.data.data.getAllReport_ById.UserIT,
+      date_completionWO:
+        resReport.data.data.getAllReport_ById.date_completionWO,
     });
   };
 
@@ -66,70 +85,23 @@ function ConfirmationWO() {
     }
   };
 
-  const handleSubmit = async () => {
-    setIsLoading(true);
-
-    const payload = {
-      namaBarang: form.namaBarang,
-      kodeBarang: form.kodeBarang,
-      permasalahan: form.permasalahan,
-      tindakan: form.tindakan,
-      gantiSparepart: form.gantiSparepart,
-      UserRequestId: form.UserRequestId,
-      UserApproveId: form.UserApproveId,
-      UserITid: form.UserITid,
-      HeadITid: form.HeadITid,
-      DepartUserId: form.DepartUserId,
-    };
-
-    console.log(payload);
-    console.log("payload");
-
-    await postData(`/checkout`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(`Berhasil konfirmasi Work Order`);
-          navigate("/work-order-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
-  };
-
   return (
-    <>
-      <Navbar />
-      <Container md={12}>
-        <BreadCrumb
-          textSecound={"User"}
-          urlSecound={"/work-order-page"}
-          textThird="Edit"
-        />
-        <div className="m-auto" style={{ width: "50%" }}>
-          {alert.status && <SAlert type={alert.type} message={alert.message} />}
-        </div>
-        <Card style={{ width: "60%" }} className="m-auto mt-5">
-          <Card.Body>
-            <Card.Title className="text-center mb-5">Work Order</Card.Title>
-            <ConfirmWOInput
-              form={form}
-              isLoading={isLoading}
-              lists={lists}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            />
-          </Card.Body>
-        </Card>
-      </Container>
-    </>
+    <Container md={12}>
+      <BreadCrumb
+        textSecound={"User"}
+        urlSecound={"/work-order-page"}
+        textThird="History Order"
+      />
+      <Card style={{ width: "60%" }} className="m-auto mt-5">
+        <Card.Body>
+          <Card.Title className="text-center mb-5">
+            History Work Order
+          </Card.Title>
+          <ConfirmWOInput form={form} />
+        </Card.Body>
+      </Card>
+    </Container>
   );
 }
 
-export default ConfirmationWO;
+export default HistoryWO;

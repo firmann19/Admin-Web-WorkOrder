@@ -7,6 +7,7 @@ import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import GroupInput from "../../components/Group-Input/GroupInput";
+import Navbar from "../../components/navbar";
 
 function EditGroup() {
   const navigate = useNavigate();
@@ -66,6 +67,8 @@ function EditGroup() {
   };
 
   return (
+    <>
+    <Navbar />
     <Container md={12}>
       <BreadCrumb
         textSecound={"Group"}
@@ -88,6 +91,7 @@ function EditGroup() {
         </Card.Body>
       </Card>
     </Container>
+    </>
   );
 }
 

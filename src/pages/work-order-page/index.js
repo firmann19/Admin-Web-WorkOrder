@@ -5,18 +5,19 @@ import SelectBox from "../../components/selectBox";
 import BreadCrumb from "../../components/Breadcrumb";
 import Table from "../../components/TableWithAction";
 import SearchInput from "../../components/SearchInput";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+//import Swal from "sweetalert2";
+//import { putData } from "../../utils/fetch";
+import { fetchCheckouts } from "../../redux/checkouts/actions";
 import Swal from "sweetalert2";
 import { putData } from "../../utils/fetch";
-import { fetchCheckouts } from "../../redux/checkouts/actions";
 import { setNotif } from "../../redux/notif/actions";
+import Navbar from "../../components/navbar";
+//import { setNotif } from "../../redux/notif/actions";
 
 function WorkOrderPage() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const notif = useSelector((state) => state.notif);
   const checkouts = useSelector((state) => state.checkouts);
 
   useEffect(() => {
@@ -36,9 +37,9 @@ function WorkOrderPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const payload = {
-          StatusWO: status === "Close" ? "Pending" : "Close",
+          StatusPengerjaan: status === "Close" ? "Pending" : "Close",
         };
-        const res = await putData(`/StatusWO/${id}`, payload);
+        const res = await putData(`/statusPengerjaan/${id}`, payload);
 
         dispatch(
           setNotif(
@@ -55,6 +56,8 @@ function WorkOrderPage() {
 
 
   return (
+    <>
+    <Navbar />
     <Container className="mt-3">
       <BreadCrumb textSecound={"Work Order"} />
       <Row>
@@ -76,22 +79,30 @@ function WorkOrderPage() {
         status={checkouts.status}
         thead={[
           "Nama",
-          "Nama Peralatan",
-          "Kode Peralatan",
-          "Permasalahan",
+          "Departement",
+          "Peralatan",
+          "Kode",
           "Status",
+          "Tanngal Order",
+          "Pengerjaan",
+          "Tanngal Pengerjaan",
           "Aksi",
         ]}
         data={checkouts.data}
         tbody={[
+          "UserRequestId",
+          "DepartUserId",
           "namaBarang",
           "kodeBarang",
-          "permasalahan",
-          "UserRequestId",
           "StatusWO",
+          "date_requestWO",
+          "StatusPengerjaan",
+          "date_completionWO",
           "Aksi",
         ]}
         confirmationUrl={`/work-order-page/confirmation-wo`}
+        Detail={`/work-order-page/history-wo`}
+        //editUrl={`/register-page/edit-user`}
         customAction={(id, status = "") => {
           return (
             <Button
@@ -107,6 +118,7 @@ function WorkOrderPage() {
         withoutPagination
       />
     </Container>
+    </>
   );
 }
 

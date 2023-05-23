@@ -1,13 +1,13 @@
 import {
   ERROR_FETCHING_LISTS_DEPARTEMENT,
   ERROR_FETCHING_LISTS_GROUP,
-  ERROR_FETCHING_LISTS_USER,
+  ERROR_FETCHING_LISTS_HeadIT,
   START_FETCHING_LISTS_DEPARTEMENT,
   START_FETCHING_LISTS_GROUP,
-  START_FETCHING_LISTS_USER,
+  START_FETCHING_LISTS_HeadIT,
   SUCCESS_FETCHING_LISTS_DEPARTEMENT,
   SUCCESS_FETCHING_LISTS_GROUP,
-  SUCCESS_FETCHING_LISTS_USER,
+  SUCCESS_FETCHING_LISTS_HeadIT,
 } from "./constants";
 
 const statuslist = {
@@ -22,8 +22,8 @@ const initialState = {
   statusDepartements: statuslist.idle,
   groups: [],
   statusGroups: statuslist.idle,
-  users: [],
-  statusUsers: statuslist.idle,
+  HeadIT: [],
+  statusHeadIT: statuslist.idle,
 };
 
 export default function reducer(state = initialState, action) {
@@ -54,20 +54,20 @@ export default function reducer(state = initialState, action) {
         groups: action.groups,
       };
 
-    case START_FETCHING_LISTS_USER:
-      return { ...state, statusUsers: statuslist.process };
+    case START_FETCHING_LISTS_HeadIT:
+      return { ...state, statusHeadIT: statuslist.process };
 
-    case ERROR_FETCHING_LISTS_USER:
+    case ERROR_FETCHING_LISTS_HeadIT:
       return {
         ...state,
-        statusUsers: statuslist.error,
+        statusHeadIT: statuslist.error,
       };
 
-    case SUCCESS_FETCHING_LISTS_USER:
+    case SUCCESS_FETCHING_LISTS_HeadIT:
       return {
         ...state,
-        statusGroups: statuslist.success,
-        users: action.users,
+        statusHeadIT: statuslist.success,
+        HeadIT: action.HeadIT,
       };
 
     default:

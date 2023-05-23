@@ -1,7 +1,4 @@
-import "./assets/libs/boxicons-2.1.1/css/boxicons.min.css";
-import "./scss/App.scss";
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "./layout/MainLayout";
 import { useEffect } from "react";
 import { listen } from "./redux/listener";
 import LoginPage from "./pages/LoginPage";
@@ -11,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "../src/pages/dashboard-page";
 import WorkOrderPage from "../src/pages/work-order-page";
 import RegisterPage from "../src/pages/register-user-page";
-import SettingsPage from "../src/pages/settings-page";
 import CreateUser from "./pages/register-user-page/Create";
 import EditUser from "./pages/register-user-page/edit";
 import DepartementPage from "./pages/Departement-Page";
@@ -32,13 +28,10 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/login-page" element={<LoginPage />} />
-        {/* <Route> */}
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/work-order-page" element={<WorkOrderPage />} />
           <Route path="/work-order-page/confirmation-wo/:id" element={<ConfirmationWO />}/>
           <Route path="/register-page" element={<RegisterPage />} />
-          <Route path="/settings-page" element={<SettingsPage />} />
           <Route path="/register-page/create-user" element={<CreateUser />} />
           <Route path="/register-page/edit-user/:id" element={<EditUser />} />
           <Route path="/departement-page" element={<DepartementPage />}/>
@@ -47,8 +40,6 @@ function App() {
           <Route path="/group-page" element={<GroupPage />}/>
           <Route path="/group-page/create-group" element={<CreateGroup />}/>
           <Route path="/group-page/edit-group/:id" element={<EditGroup />}/>
-        </Route>
-       
       </Routes>
     </>
   );

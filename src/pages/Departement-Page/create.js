@@ -8,6 +8,7 @@ import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import DepartementInput from "../../components/Departement-Input/DepartementInput";
+import Navbar from "../../components/navbar";
 
 function CreateDepartement() {
   const navigate = useNavigate();
@@ -53,28 +54,31 @@ function CreateDepartement() {
       .catch((err) => console.log("ini errror", err));
   };
   return (
-    <Container md={12}>
-      <BreadCrumb
-        textSecound={"Departement"}
-        urlSecound={"/departement-page"}
-        textThird="Create"
-      />
-      <div className="m-auto" style={{ width: "50%" }}>
-        {alert.status && <SAlert type={alert.type} message={alert.message} />}
-      </div>
-      <Card style={{ width: "60%" }} className="m-auto mt-5">
-        <Card.Body>
-          <Card.Title className="text-center">Form Departement</Card.Title>
-          <p className="text-center">Create New Departement</p>
-          <DepartementInput
-            form={form}
-            isLoading={isLoading}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-        </Card.Body>
-      </Card>
-    </Container>
+    <>
+      <Navbar />
+      <Container md={12}>
+        <BreadCrumb
+          textSecound={"Departement"}
+          urlSecound={"/departement-page"}
+          textThird="Create"
+        />
+        <div className="m-auto" style={{ width: "50%" }}>
+          {alert.status && <SAlert type={alert.type} message={alert.message} />}
+        </div>
+        <Card style={{ width: "60%" }} className="m-auto mt-5">
+          <Card.Body>
+            <Card.Title className="text-center">Form Departement</Card.Title>
+            <p className="text-center">Create New Departement</p>
+            <DepartementInput
+              form={form}
+              isLoading={isLoading}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          </Card.Body>
+        </Card>
+      </Container>
+    </>
   );
 }
 

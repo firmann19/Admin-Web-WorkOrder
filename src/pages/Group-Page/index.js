@@ -11,6 +11,7 @@ import { deleteData } from "../../utils/fetch";
 import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import { fetchGroups } from "../../redux/groups/actions";
+import Navbar from "../../components/navbar";
 
 function GroupPage() {
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ function GroupPage() {
   };
 
   return (
+    <>
+    <Navbar />
     <Container className="mt-3">
       <Button action={() => navigate("/group-page/create-group")} >Tambah</Button>
       <BreadCrumb textSecound={"Group"} />
@@ -66,6 +69,7 @@ function GroupPage() {
         withoutPagination
       />
     </Container>
+    </>
   );
 }
 

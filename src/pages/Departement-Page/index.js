@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteData } from "../../utils/fetch";
 import { toast } from "react-toastify";
 import { fetchDepartements } from "../../redux/departements/actions";
+import Navbar from "../../components/navbar";
 
 function DepartementPage() {
   const navigate = useNavigate();
@@ -44,6 +45,8 @@ function DepartementPage() {
   };
 
   return (
+    <>
+    <Navbar />
     <Container className="mt-3">
       <Button action={() => navigate("/departement-page/create-departement")}>
         Tambah
@@ -65,6 +68,7 @@ function DepartementPage() {
         withoutPagination
       />
     </Container>
+    </>
   );
 }
 
