@@ -1,0 +1,13 @@
+.navbar-nav {
+    gap: 1rem;
+    margin-left: 2rem;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar a.active {
+    color: crimson;
+}

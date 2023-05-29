@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import LogoHTA from "../../assets/images/logo-hta.png";
 import { Badge } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "./navbar.css";
 
 function Navbar() {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
-
 
   useEffect(() => {
     const fetchData = () => {
@@ -17,7 +17,7 @@ function Navbar() {
         : {};
 
       setUser(user);
-      setRole(role)
+      setRole(role);
     };
     fetchData();
   }, []);
@@ -26,7 +26,6 @@ function Navbar() {
     localStorage.clear();
     window.location.href = "/login-page";
   };
-
 
   return (
     <section>
@@ -51,31 +50,21 @@ function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
-                  Dashboard
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/work-order-page">
-                  Work Order
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/register-page">
-                  Register User
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/departement-page">
-                  Departement
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/group-page">
-                  Group
-                </a>
-              </li>
+              <NavLink to="/" exact className="nav-item" activeClassName = "active">
+                Dashboard
+              </NavLink>
+              <NavLink to="/work-order-page" className="nav-item" activeClassName = "active">
+                Work Order
+              </NavLink>
+              <NavLink to="/register-page" className="nav-item" activeClassName = "active">
+                Register User
+              </NavLink>
+              <NavLink to="/departement-page" className="nav-item" activeClassName = "active">
+                Departement
+              </NavLink>
+              <NavLink to="/group-page" className="nav-item" activeClassName = "active">
+                Group
+              </NavLink>
             </ul>
             <Badge badgeContent={4} color="primary" className="me-4">
               <MailIcon color="action" />
@@ -88,7 +77,9 @@ function Navbar() {
                 >
                   Hello, {user}
                 </h6>
-                <h6 className="fw-semibold text-lg color-palette-1">Role: {role}</h6>
+                <h6 className="fw-semibold text-lg color-palette-1">
+                  Role: {role}
+                </h6>
                 <ul class="dropdown-menu dropdown-menu-dark">
                   <li>
                     <a class="dropdown-item" href="#">
@@ -101,7 +92,11 @@ function Navbar() {
                     </a>
                   </li>
                   <li>
-                    <Link class="dropdown-item" href="#" onClick={() => handleLogout()}>
+                    <Link
+                      class="dropdown-item"
+                      href="#"
+                      onClick={() => handleLogout()}
+                    >
                       Log Out
                     </Link>
                   </li>
