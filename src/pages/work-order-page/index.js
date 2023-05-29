@@ -78,20 +78,20 @@ function WorkOrderPage() {
       <Table
         status={checkouts.status}
         thead={[
-          "Nama",
-          "Departement",
           "Peralatan",
           "Kode",
           "Status",
           "Tanngal Order",
           "Pengerjaan",
           "Tanngal Pengerjaan",
+          "Nama",
+          "Departement",
           "Aksi",
         ]}
         data={checkouts.data}
         tbody={[
-          "UserRequestId",
-          "DepartUserId",
+          "userRequestName",
+          "departUser",
           "namaBarang",
           "kodeBarang",
           "StatusWO",
@@ -115,7 +115,6 @@ function WorkOrderPage() {
             </Button>
           );
         }}
-        withoutPagination
       />
     </Container>
     </>

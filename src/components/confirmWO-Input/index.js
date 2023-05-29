@@ -161,8 +161,8 @@ function ConfirmWOInput({
         <Col className="ms-2">
           <TextInputWithLabel
             label={"Dikerjakan Oleh"}
-            name="UserITid"
-            value={form.UserITid}
+            name="User_IT"
+            value={form.User_IT}
             type="text"
             onChange={handleChange}
           />

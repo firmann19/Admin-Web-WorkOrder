@@ -6,7 +6,7 @@ import SAlert from "../../components/Alert";
 import BreadCrumb from "../../components/Breadcrumb";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { getData, postData } from "../../utils/fetch";
+import { getData, putData } from "../../utils/fetch";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,16 +19,17 @@ function ConfirmationWO() {
   const lists = useSelector((state) => state.lists);
   const { id } = useParams();
   const [form, setForm] = useState({
+    UserRequestId: 0,
+    DepartUserId: 0,
     namaBarang: "",
     kodeBarang: "",
-    DepartUserId: 0,
     permasalahan: "",
+    UserApproveId: 0,
     tindakan: "",
     gantiSparepart: "",
-    UserRequestId: 0,
-    UserApproveId: 0,
-    UserITid: "",
     HeadITid: 0,
+    User_IT: "",
+    date_completionWO: "",
   });
 
   const [alert, setAlert] = useState({
@@ -39,23 +40,23 @@ function ConfirmationWO() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchOneGroup = async () => {
+  const fetchOneWO = async () => {
     const res = await getData(`/checkout/${id}`);
-
+    
     setForm({
       ...form,
+      UserRequestId: res.data.data.getCheckout_ById.UserRequestId,
+      DepartUserId: res.data.data.getCheckout_ById.DepartUserId,
       namaBarang: res.data.data.getCheckout_ById.namaBarang,
       kodeBarang: res.data.data.getCheckout_ById.kodeBarang,
       permasalahan: res.data.data.getCheckout_ById.permasalahan,
-      UserRequestId: res.data.data.getCheckout_ById.UserRequestId,
       UserApproveId: res.data.data.getCheckout_ById.UserApproveId,
-      DepartUserId: res.data.data.getCheckout_ById.DepartUserId,
     });
   };
 
   useEffect(() => {
     dispatch(fetchListsHeadIT());
-    fetchOneGroup();
+    fetchOneWO();
   }, [dispatch]);
 
   const handleChange = async (e) => {
@@ -70,22 +71,20 @@ function ConfirmationWO() {
     setIsLoading(true);
 
     const payload = {
+      UserRequestId: form.UserRequestId,
+      DepartUserId: form.DepartUserId,
       namaBarang: form.namaBarang,
       kodeBarang: form.kodeBarang,
       permasalahan: form.permasalahan,
+      UserApproveId: form.UserApproveId,
       tindakan: form.tindakan,
       gantiSparepart: form.gantiSparepart,
-      UserRequestId: form.UserRequestId,
-      UserApproveId: form.UserApproveId,
-      UserITid: form.UserITid,
-      HeadITid: form.HeadITid,
-      DepartUserId: form.DepartUserId,
+      HeadITid: form.HeadITid.value,
+      User_IT: form.User_IT,
+      date_completionWO: form.date_completionWO,
     };
 
-    console.log(payload);
-    console.log("payload");
-
-    await postData(`/checkout`, payload)
+    await putData(`/checkout/${id}`, payload)
       .then((res) => {
         if (res.data.status === true) {
           toast.success(`Berhasil konfirmasi Work Order`);

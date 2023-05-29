@@ -108,12 +108,11 @@ function RegisterPage() {
 
       <Table
         status={user.status}
-        thead={["Nama", "Email", "Posisi",  "Departement", "Group", "Role", "Aksi"]}
+        thead={["Nama", "Email", "Posisi" ,   "Role", "Departement" , "Group", "Aksi"]}
         data={user.data}
-        tbody={["name", "email", "posisi",  "DepartementId", "GroupId", "roles", "Aksi"]}
+        tbody={["name", "email", "posisi",  "departmentName", "groupName", "roles", "Aksi"]}
         editUrl={`/register-page/edit-user`}
         deleteAction={(id) => handleDelete(id)}
-        withoutPagination
       />
     </Container>
     </>

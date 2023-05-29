@@ -47,20 +47,20 @@ function EditUser() {
       roles: res.data.data.getUser_ById.roles,
       posisi: res.data.data.getUser_ById.posisi,
       DepartementId: {
-        label: res?.data?.data?.getUser_ById.DepartementId?.name,
+        label: res?.data?.data?.getUser_ById?.DepartementId,
         target: {
           name: "DepartementId",
-          value: res?.data?.data?.getUser_ById.DepartementId?.id,
+          value: res?.data?.data?.getUser_ById?.DepartementId?.id
         },
-        value: res?.data?.data?.getUser_ById.DepartementId?.id,
+        value: res?.data?.data?.getUser_ById?.DepartementId?.id
       },
       GroupId: {
-        label: res?.data?.data?.getUser_ById.GroupId?.name,
+        label: res?.data?.data?.getUser_ById?.GroupId,
         target: {
           name: "GroupId",
-          value: res?.data?.data?.getUser_ById.GroupId?.id,
+          value: res?.data?.data?.getUser_ById?.GroupId?.id,
         },
-        value: res?.data?.data?.getUser_ById.GroupId?.id,
+        value: res?.data?.data?.getUser_ById?.GroupId?.id,
       },
     });
   };
@@ -79,7 +79,6 @@ function EditUser() {
       setForm({ ...form, [e.target.name]: e });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
-      console.log(e.target.value);
     }
   };
 
@@ -100,7 +99,7 @@ function EditUser() {
       .then((res) => {
         if (res.data.status === true) {
           toast.success(
-            `Berhasil update user ${res.data.data.getAll_users.name}`
+            `Berhasil update user`
           );
           navigate("/register-page");
           setIsLoading(false);

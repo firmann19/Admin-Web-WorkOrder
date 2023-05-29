@@ -34,17 +34,15 @@ function TbodyWithAction({
                 (key) =>
                   display.indexOf(key) > -1 && (
                     <td key={key}>
-                      {key === "date" ? (
-                        moment(data[key]).format("DD-MM-YYYY, h:mm:ss a")
-                      ) : (
-                        data[key]
-                      )}
+                      {key === "date_requestWO" || key === "date_completionWO"
+                        ? moment(data[key]).format("DD-MM-YYYY, h:mm:ss a")
+                        : data[key]}
                     </td>
                   )
               )}
               {!actionNotDisplay && (
                 <td>
-                   {customAction && customAction(data.id, data.StatusWO)}
+                  {customAction && customAction(data.id, data.StatusWO)}
                   {editUrl && (
                     <Button
                       variant="success"
@@ -54,7 +52,7 @@ function TbodyWithAction({
                       Edit
                     </Button>
                   )}
-                   {confirmationUrl && (
+                  {confirmationUrl && (
                     <Button
                       variant="secondary"
                       size={"sm"}
@@ -63,14 +61,14 @@ function TbodyWithAction({
                       Confirmation
                     </Button>
                   )}
-                   {Detail && (
+                  {Detail && (
                     <Button
-                      variant="info"
+                      variant="warning"
                       size={"sm"}
                       className={"ms-2"}
                       action={() => navigate(`${Detail}/${data.id}`)}
                     >
-                    Detail
+                      Detail
                     </Button>
                   )}
                   {deleteAction && (

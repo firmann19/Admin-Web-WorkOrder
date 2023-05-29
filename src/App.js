@@ -17,6 +17,8 @@ import GroupPage from "./pages/Group-Page";
 import CreateGroup from "./pages/Group-Page/create";
 import EditGroup from "./pages/Group-Page/edit";
 import ConfirmationWO from "./pages/work-order-page/Confirmation";
+import HistoryWO from "./pages/work-order-page/historyWO";
+import Navbar from "./components/navbar";
 
 function App() {
   useEffect(() => {
@@ -31,6 +33,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/work-order-page" element={<WorkOrderPage />} />
           <Route path="/work-order-page/confirmation-wo/:id" element={<ConfirmationWO />}/>
+          <Route path="/work-order-page/history-wo/:id" element={<HistoryWO />} />
           <Route path="/register-page" element={<RegisterPage />} />
           <Route path="/register-page/create-user" element={<CreateUser />} />
           <Route path="/register-page/edit-user/:id" element={<EditUser />} />

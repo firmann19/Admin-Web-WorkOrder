@@ -1,16 +1,7 @@
 import React from "react";
-import SButton from "../Button";
 import { Col, Form, Row } from "react-bootstrap";
-import TextInputWithLabel from "../TextInputWithLabel";
-import SelectBox from "../selectBox";
 
-function HistoryWOInput({
-  form,
-  lists,
-  handleChange,
-  handleSubmit,
-  isLoading,
-}) {
+function HistoryWOInput({ form, lists, handleChange }) {
   return (
     <Form method="post" className="form-register">
       <Row className="mt-4 mb-4">
@@ -112,14 +103,18 @@ function HistoryWOInput({
           />
         </Col>
       </Row>
-      <Form.Control
-        id="tindakan"
-        name="tindakan"
-        value={form?.tindakan}
-        onChange={handleChange}
-        as="textarea"
-        rows={3}
-      />
+      <Form.Group className="mb-3">
+        <Form.Control
+          as="textarea"
+          rows={3}
+          id="tindakan"
+          name="tindakan"
+          value={form?.tindakan}
+          onChange={handleChange}
+          disabled
+          readOnly
+        />
+      </Form.Group>
 
       <Form.Group className="mb-4 mt-4">
         <Form.Label>Sparepart yang diganti</Form.Label>
@@ -130,6 +125,8 @@ function HistoryWOInput({
           onChange={handleChange}
           as="textarea"
           rows={3}
+          disabled
+          readOnly
         />
       </Form.Group>
 
@@ -159,39 +156,29 @@ function HistoryWOInput({
         </Col>
 
         <Col className="ms-2">
-          <TextInputWithLabel
-            label={"Dikerjakan Oleh"}
-            name="UserITid"
-            value={form.UserITid}
+          <Form.Label>Dikerjakan Oleh</Form.Label>
+          <Form.Control
+            name="User_IT"
+            value={form?.User_IT}
             type="text"
             onChange={handleChange}
+            readOnly
+            disabled
           />
         </Col>
 
-        <Col className="me-3">
-          <SelectBox
-            label={"Diketahui"}
-            placeholder={"Pilih..."}
+        <Col className="ms-2">
+          <Form.Label>Diketahui</Form.Label>
+          <Form.Control
             name="HeadITid"
-            isClearable={true}
-            value={form.HeadITid}
-            options={lists.HeadIT}
-            handleChange={(e) => handleChange(e)}
+            value={form?.HeadITid}
+            type="text"
+            onChange={handleChange}
+            readOnly
+            disabled
           />
         </Col>
       </Row>
-
-      <div className="mx-auto w-25 mt-5">
-        <SButton
-          className="w-100"
-          loading={isLoading}
-          disabled={isLoading}
-          action={handleSubmit}
-          variant="danger"
-        >
-          Submit
-        </SButton>
-      </div>
     </Form>
   );
 }

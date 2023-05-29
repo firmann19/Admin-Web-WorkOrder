@@ -65,7 +65,6 @@ function DepartementPage() {
         tbody={["nama", "Aksi"]}
         editUrl={`/departement-page/edit-departement`}
         deleteAction={(id) => handleDelete(id)}
-        withoutPagination
       />
     </Container>
     </>

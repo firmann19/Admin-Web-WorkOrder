@@ -41,7 +41,13 @@ export const fetchUsers = () => {
       }, 5000);
 
       let res = await debouncedFetchUsers("/user");
+      console.log("test", res)
 
+      for (const element of res.data.data.getAll_users) {
+        element.departmentName = element.Departement.nama;
+        element.groupName = element.Group.nama
+      };
+      
       dispatch(
         successFetchingUsers({
           users: res.data.data.getAll_users,

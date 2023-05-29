@@ -5,7 +5,6 @@ import { postData } from "../../utils/fetch";
 import RegisterInput from "../../components/Register-Input/RegisterInput";
 import BreadCrumb from "../../components/Breadcrumb";
 import {
-  fetchListsDepartement,
   fetchListsGroup,
 } from "../../redux/lists/actions";
 import { Card, Container } from "react-bootstrap";
@@ -27,7 +26,7 @@ const CreateUser = () => {
     GroupId: 0,
   });
 
-  const [alert, setAlert] = useState({
+  const [alert] = useState({
     status: false,
     type: "",
     message: "",
@@ -36,7 +35,7 @@ const CreateUser = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchListsDepartement());
+    //dispatch(fetchListsDepartement());
     dispatch(fetchListsGroup());
   }, [dispatch]);
 

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { deleteData } from "../../utils/fetch";
-import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import { fetchGroups } from "../../redux/groups/actions";
 import Navbar from "../../components/navbar";
@@ -16,8 +15,6 @@ import Navbar from "../../components/navbar";
 function GroupPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const notif = useSelector((state) => state.notif);
   const groups = useSelector((state) => state.groups);
 
   useEffect(() => {
@@ -61,12 +58,11 @@ function GroupPage() {
 
       <Table
         status={groups.status}
-        thead={["Nama", "Aksi"]}
+        thead={["Group", "Aksi"]}
         data={groups.data}
         tbody={["nama", "Aksi"]}
         editUrl={`/group-page/edit-group`}
         deleteAction={(id) => handleDelete(id)}
-        withoutPagination
       />
     </Container>
     </>
