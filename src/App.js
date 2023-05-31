@@ -29,8 +29,8 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
-        <Route path="/login-page" element={<LoginPage />} />
-          <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/work-order-page" element={<WorkOrderPage />} />
           <Route path="/work-order-page/confirmation-wo/:id" element={<ConfirmationWO />}/>
           <Route path="/work-order-page/history-wo/:id" element={<HistoryWO />} />

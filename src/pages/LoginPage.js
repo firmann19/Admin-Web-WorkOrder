@@ -55,7 +55,7 @@ function LoginPage() {
       );
 
       setIsLoading(false);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setIsLoading(false);
       setAlert({

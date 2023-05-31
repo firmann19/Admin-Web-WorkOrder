@@ -50,7 +50,7 @@ function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <NavLink to="/" exact className="nav-item" activeClassName = "active">
+              <NavLink to="/dashboard" exact className="nav-item" activeClassName = "active">
                 Dashboard
               </NavLink>
               <NavLink to="/work-order-page" className="nav-item" activeClassName = "active">
