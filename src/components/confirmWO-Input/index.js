@@ -1,12 +1,12 @@
 import React from "react";
 import SButton from "../Button";
 import { Col, Form, Row } from "react-bootstrap";
-import TextInputWithLabel from "../TextInputWithLabel";
 import SelectBox from "../selectBox";
 
 function ConfirmWOInput({
   form,
   lists,
+  user,
   handleChange,
   handleSubmit,
   isLoading,
@@ -133,6 +133,15 @@ function ConfirmWOInput({
         />
       </Form.Group>
 
+      <SButton
+          className="w-40"
+          variant="primary"
+          href="/create-changeSparepart"
+        >
+          Ajukan Pergantian
+        </SButton>
+        
+
       <Row className="mt-4 mb-4">
         <Col className="ms-2">
           <Form.Label>Pemohon</Form.Label>
@@ -159,12 +168,13 @@ function ConfirmWOInput({
         </Col>
 
         <Col className="ms-2">
-          <TextInputWithLabel
-            label={"Dikerjakan Oleh"}
-            name="User_IT"
-            value={form.User_IT}
+          <Form.Label>Dikerjakan Oleh</Form.Label>
+          <Form.Control
+            name="name"
+            value={user}
             type="text"
-            onChange={handleChange}
+            readOnly
+            disabled
           />
         </Col>
 

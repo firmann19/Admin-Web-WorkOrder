@@ -5,20 +5,17 @@ import SelectBox from "../../components/selectBox";
 import BreadCrumb from "../../components/Breadcrumb";
 import Table from "../../components/TableWithAction";
 import SearchInput from "../../components/SearchInput";
-//import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-//import Swal from "sweetalert2";
-//import { putData } from "../../utils/fetch";
 import { fetchCheckouts } from "../../redux/checkouts/actions";
 import Swal from "sweetalert2";
 import { putData } from "../../utils/fetch";
 import { setNotif } from "../../redux/notif/actions";
 import Navbar from "../../components/navbar";
-//import { setNotif } from "../../redux/notif/actions";
 
 function WorkOrderPage() {
   const dispatch = useDispatch();
   const checkouts = useSelector((state) => state.checkouts);
+  console.log("lihat", checkouts)
 
   useEffect(() => {
     dispatch(fetchCheckouts());
@@ -37,7 +34,7 @@ function WorkOrderPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const payload = {
-          StatusPengerjaan: status === "Close" ? "Pending" : "Close",
+          StatusPengerjaan: status === "OnProgress" ? "Pending" : "OnProgress",
         };
         const res = await putData(`/statusPengerjaan/${id}`, payload);
 
@@ -83,21 +80,19 @@ function WorkOrderPage() {
           "Status",
           "Tanngal Order",
           "Pengerjaan",
-          "Tanngal Pengerjaan",
           "Nama",
-          "Departement",
+          "Departement", 
           "Aksi",
         ]}
         data={checkouts.data}
         tbody={[
-          "userRequestName",
-          "departUser",
+          "fullName",
+          "departmentName",
           "namaBarang",
           "kodeBarang",
           "StatusWO",
           "date_requestWO",
           "StatusPengerjaan",
-          "date_completionWO",
           "Aksi",
         ]}
         confirmationUrl={`/work-order-page/confirmation-wo`}
@@ -116,6 +111,7 @@ function WorkOrderPage() {
           );
         }}
       />
+
     </Container>
     </>
   );

@@ -6,7 +6,7 @@ function SBreadCrumb({ textSecound, textThird, urlSecound }) {
   const navigate = useNavigate();
   return (
     <Breadcrumb className="my-2">
-      <Breadcrumb.Item onClick={() => navigate("/")}>Dashboard</Breadcrumb.Item>
+      <Breadcrumb.Item onClick={() => navigate("/dashboard")}>Dashboard</Breadcrumb.Item>
       {!textThird && <Breadcrumb.Item active>{textSecound}</Breadcrumb.Item>}
 
       {textThird && (

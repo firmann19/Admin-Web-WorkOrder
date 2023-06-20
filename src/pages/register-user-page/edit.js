@@ -127,7 +127,7 @@ function EditUser() {
         <div className="m-auto" style={{ width: "50%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
-        <Card style={{ width: "60%" }} className="m-auto mt-5">
+        <Card style={{ width: "60%" }} className="m-auto mt-5 mb-5">
           <Card.Body>
             <Card.Title className="text-center">Form Update</Card.Title>
             <p className="text-center">Please update user data </p>

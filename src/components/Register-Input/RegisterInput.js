@@ -51,23 +51,32 @@ function RegisterInput({ form, lists, handleChange, handleSubmit, isLoading }) {
         </Col>
       </Row>
 
-      <TextInputWithLabel
-        placeholder={"Masukan Posisi..."}
-        label={"Posisi"}
-        name="posisi"
-        value={form?.posisi}
-        type="text"
-        onChange={handleChange}
-      />
+      <Row className="mt-4 mb-4">
+        <Col className="ms-2">
+          <SelectBox
+            label={"Posisi"}
+            placeholder={"Pilih posisi anda..."}
+            name="posisiId"
+            isClearable={true}
+            value={form.posisiId}
+            options={lists.positions}
+            handleChange={(e) => handleChange(e)}
+          />
+        </Col>
 
-      <TextInputWithLabel
-        placeholder={"Masukan Role..."}
-        label={"Role"}
-        name="roles"
-        value={form?.roles}
-        type="text"
-        onChange={handleChange}
-      />
+        <Col className="me-3">
+          <SelectBox
+            label={"Role"}
+            placeholder={"Pilih role anda..."}
+            name="role"
+            isClearable={true}
+            value={form.roles}
+            options={lists.role}
+            handleChange={(e) => handleChange(e)}
+          />
+        </Col>
+      </Row>
+
 
       <TextInputWithLabel
         placeholder={"Masukan Password"}

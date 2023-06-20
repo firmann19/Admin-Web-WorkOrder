@@ -11,6 +11,7 @@ function TbodyWithAction({
   deleteAction,
   actionNotDisplay,
   customAction,
+  customActionSecond,
   confirmationUrl,
   Detail,
   status,
@@ -34,7 +35,7 @@ function TbodyWithAction({
                 (key) =>
                   display.indexOf(key) > -1 && (
                     <td key={key}>
-                      {key === "date_requestWO" || key === "date_completionWO"
+                      {key === "date_requestWO" 
                         ? moment(data[key]).format("DD-MM-YYYY, h:mm:ss a")
                         : data[key]}
                     </td>
@@ -43,6 +44,7 @@ function TbodyWithAction({
               {!actionNotDisplay && (
                 <td>
                   {customAction && customAction(data.id, data.StatusWO)}
+                  {customActionSecond && customActionSecond(data.id, data.StatusWO)}
                   {editUrl && (
                     <Button
                       variant="success"

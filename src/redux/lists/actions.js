@@ -5,16 +5,24 @@ import {
   ERROR_FETCHING_LISTS_DEPARTEMENT,
   ERROR_FETCHING_LISTS_GROUP,
   ERROR_FETCHING_LISTS_HeadIT,
+  ERROR_FETCHING_LISTS_POSISI,
+  ERROR_FETCHING_LISTS_ROLES,
   START_FETCHING_LISTS_DEPARTEMENT,
   START_FETCHING_LISTS_GROUP,
   START_FETCHING_LISTS_HeadIT,
+  START_FETCHING_LISTS_POSISI,
+  START_FETCHING_LISTS_ROLES,
   SUCCESS_FETCHING_LISTS_DEPARTEMENT,
   SUCCESS_FETCHING_LISTS_GROUP,
   SUCCESS_FETCHING_LISTS_HeadIT,
+  SUCCESS_FETCHING_LISTS_POSISI,
+  SUCCESS_FETCHING_LISTS_ROLES,
 } from "./constants";
 
 let debouncedFetchListsDepartement = debounce(getData, 1000);
 let debouncedFetchListsGroup = debounce(getData, 1000);
+let debouncedFetchListsPosisi = debounce(getData, 1000);
+let debouncedFetchListsRole = debounce(getData, 1000);
 let debouncedFetchListsHeadIT = debounce(getData, 1000);
 
 // Departement
@@ -111,6 +119,94 @@ export const fetchListsGroup = () => {
   };
 };
 
+// Posisi
+export const startFetchingListsPosisi = () => {
+  return {
+    type: START_FETCHING_LISTS_POSISI,
+  };
+};
+
+export const successFetchingListsPosisi = ({ positions }) => {
+  return {
+    type: SUCCESS_FETCHING_LISTS_POSISI,
+    positions,
+  };
+};
+
+export const errorFetchingListsPosisi = () => {
+  return {
+    type: ERROR_FETCHING_LISTS_POSISI,
+  };
+};
+
+export const fetchListsPosisi = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingListsPosisi());
+
+    try {
+      let res = await debouncedFetchListsPosisi("/posisi");
+
+      let _temp = [];
+
+      res.data.data.getAll_posisi.forEach((res) => {
+        _temp.push({
+          value: res.id,
+          label: res.jabatan,
+          target: { value: res.id, name: "posisiId" },
+        });
+      });
+
+      dispatch(successFetchingListsPosisi({ positions: _temp }));
+    } catch (error) {
+      dispatch(errorFetchingListsPosisi());
+    }
+  };
+};
+
+// Roles
+export const startFetchingListsRoles = () => {
+  return {
+    type: START_FETCHING_LISTS_ROLES,
+  };
+};
+
+export const successFetchingListsRoles = ({ role }) => {
+  return {
+    type: SUCCESS_FETCHING_LISTS_ROLES,
+    role,
+  };
+};
+
+export const errorFetchingListsRoles = () => {
+  return {
+    type: ERROR_FETCHING_LISTS_ROLES,
+  };
+};
+
+export const fetchListsRoles = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingListsRoles());
+
+    try {
+      let res = await debouncedFetchListsRole("/role");
+
+      let _temp = [];
+
+      res.data.data.getAll_Role.forEach((res) => {
+        _temp.push({
+          value: res.id,
+          label: res.roleEmploye,
+          target: { value: res.id, name: "roles" },
+        });
+      });
+
+      dispatch(successFetchingListsRoles({ role: _temp }));
+    } catch (error) {
+      dispatch(errorFetchingListsRoles());
+    }
+  };
+};
+
 // User
 
 export const startFetchingListsHeadIT = () => {
@@ -145,7 +241,7 @@ export const fetchListsHeadIT = () => {
         _temp.push({
           value: res.id,
           label: res.name,
-          target: {value: res.id, name: "HeadITid"}
+          target: { value: res.id, name: "HeadITid" },
         });
       });
 

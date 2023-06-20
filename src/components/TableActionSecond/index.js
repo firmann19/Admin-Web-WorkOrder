@@ -14,7 +14,6 @@ function TableWithAction({
   editUrl,
   deleteAction,
   customAction,
-  customActionSecond,
   confirmationUrl,
   Detail,
   status,
@@ -22,7 +21,7 @@ function TableWithAction({
 }) {
   return (
     <>
-      <Table striped bordered variant="light" hover>
+      <table className="table table-borderless bg-light">
         <Thead text={thead} />
         <Tbody
           status={status}
@@ -32,11 +31,10 @@ function TableWithAction({
           deleteAction={deleteAction}
           actionNotDisplay={actionNotDisplay}
           customAction={customAction}
-          customActionSecond={customActionSecond}
           confirmationUrl={confirmationUrl}
           Detail={Detail}
         />
-      </Table>
+      </table>
       {!withoutPagination && data.length ? (
         <Pagination pages={pages} handlePageClick={handlePageClick} />
       ) : (

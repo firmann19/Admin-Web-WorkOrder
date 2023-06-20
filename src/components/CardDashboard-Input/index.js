@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFillLaptopFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import LogoWO from "../../assets/images/data-gathering.png";
 import Departement from "../../assets/images/network.png";
 import Group from "../../assets/images/united.png";
@@ -36,7 +36,7 @@ function CardDashboard() {
               <div>
                 <h3 className="text-white">150</h3>
 
-                <p className="text-white">Departement</p>
+                <p className="text-white">Open</p>
               </div>
               <img src={Departement} className="icon-wo" />
             </div>
@@ -56,7 +56,7 @@ function CardDashboard() {
               <div>
                 <h3 className="text-white">150</h3>
 
-                <p className="text-white">Group</p>
+                <p className="text-white">Progress</p>
               </div>
               <img src={Group} className="icon-wo" />
             </div>
@@ -76,7 +76,7 @@ function CardDashboard() {
               <div>
                 <h3 className="text-white">150</h3>
 
-                <p className="text-white">Register User</p>
+                <p className="text-white">Close</p>
               </div>
               <img src={AddUser} className="icon-wo" />
             </div>

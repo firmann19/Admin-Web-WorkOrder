@@ -44,8 +44,10 @@ export const fetchUsers = () => {
       console.log("test", res)
 
       for (const element of res.data.data.getAll_users) {
+        element.posisi = element.Posisi.jabatan;
+        element.role = element.Role.roleEmploye;
         element.departmentName = element.Departement.nama;
-        element.groupName = element.Group.nama
+        element.groupName = element.Group.nama;
       };
       
       dispatch(

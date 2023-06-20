@@ -18,7 +18,9 @@ import CreateGroup from "./pages/Group-Page/create";
 import EditGroup from "./pages/Group-Page/edit";
 import ConfirmationWO from "./pages/work-order-page/Confirmation";
 import HistoryWO from "./pages/work-order-page/historyWO";
-import Navbar from "./components/navbar";
+import CreateChangeSparepart from "./pages/changeSparepart/create";
+import ChangeSparepartPage from "./pages/changeSparepart";
+import HistoryChangeSparepart from "./pages/changeSparepart/detail";
 
 function App() {
   useEffect(() => {
@@ -30,19 +32,37 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/work-order-page" element={<WorkOrderPage />} />
-          <Route path="/work-order-page/confirmation-wo/:id" element={<ConfirmationWO />}/>
-          <Route path="/work-order-page/history-wo/:id" element={<HistoryWO />} />
-          <Route path="/register-page" element={<RegisterPage />} />
-          <Route path="/register-page/create-user" element={<CreateUser />} />
-          <Route path="/register-page/edit-user/:id" element={<EditUser />} />
-          <Route path="/departement-page" element={<DepartementPage />}/>
-          <Route path="/departement-page/create-departement" element={<CreateDepartement />}/>
-          <Route path="/departement-page/edit-departement/:id" element={<EditDepartement />}/>
-          <Route path="/group-page" element={<GroupPage />}/>
-          <Route path="/group-page/create-group" element={<CreateGroup />}/>
-          <Route path="/group-page/edit-group/:id" element={<EditGroup />}/>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/work-order-page" element={<WorkOrderPage />} />
+        <Route
+          path="/work-order-page/confirmation-wo/:id"
+          element={<ConfirmationWO />}
+        />
+        <Route path="/work-order-page/history-wo/:id" element={<HistoryWO />} />
+        <Route path="/register-page" element={<RegisterPage />} />
+        <Route path="/register-page/create-user" element={<CreateUser />} />
+        <Route path="/register-page/edit-user/:id" element={<EditUser />} />
+        <Route path="/departement-page" element={<DepartementPage />} />
+        <Route
+          path="/departement-page/create-departement"
+          element={<CreateDepartement />}
+        />
+        <Route
+          path="/departement-page/edit-departement/:id"
+          element={<EditDepartement />}
+        />
+        <Route path="/group-page" element={<GroupPage />} />
+        <Route
+          path="/create-changeSparepart"
+          element={<CreateChangeSparepart />}
+        />
+        <Route path="/changeSparepart-page" element={<ChangeSparepartPage />} />
+        <Route
+          path="/changeSparepart-page/historyChangeSparepart-page/:id"
+          element={<HistoryChangeSparepart />}
+        />
+        <Route path="/group-page/create-group" element={<CreateGroup />} />
+        <Route path="/group-page/edit-group/:id" element={<EditGroup />} />
       </Routes>
     </>
   );

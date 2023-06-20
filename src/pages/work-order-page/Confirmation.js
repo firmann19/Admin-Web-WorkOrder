@@ -16,6 +16,8 @@ import Navbar from "../../components/navbar";
 function ConfirmationWO() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [user, setUser] = useState(null);
+  const [idUser, setId] = useState(null);
   const lists = useSelector((state) => state.lists);
   const { id } = useParams();
   const [form, setForm] = useState({
@@ -28,7 +30,7 @@ function ConfirmationWO() {
     tindakan: "",
     gantiSparepart: "",
     HeadITid: 0,
-    User_IT: "",
+    User_IT: 0,
     date_completionWO: "",
   });
 
@@ -42,7 +44,8 @@ function ConfirmationWO() {
 
   const fetchOneWO = async () => {
     const res = await getData(`/checkout/${id}`);
-    
+    console.log("test", res);
+
     setForm({
       ...form,
       UserRequestId: res.data.data.getCheckout_ById.UserRequestId,
@@ -57,6 +60,15 @@ function ConfirmationWO() {
   useEffect(() => {
     dispatch(fetchListsHeadIT());
     fetchOneWO();
+
+    const fecthData = () => {
+      let { user, idUser } = localStorage.getItem("auth")
+        ? JSON.parse(localStorage.getItem("auth"))
+        : {};
+      setUser(user);
+      setId(idUser);
+    };
+    fecthData();
   }, [dispatch]);
 
   const handleChange = async (e) => {
@@ -80,7 +92,7 @@ function ConfirmationWO() {
       tindakan: form.tindakan,
       gantiSparepart: form.gantiSparepart,
       HeadITid: form.HeadITid.value,
-      User_IT: form.User_IT,
+      User_IT: idUser,
       date_completionWO: form.date_completionWO,
     };
 
@@ -107,7 +119,7 @@ function ConfirmationWO() {
       <Navbar />
       <Container md={12}>
         <BreadCrumb
-          textSecound={"User"}
+          textSecound={"Work Order"}
           urlSecound={"/work-order-page"}
           textThird="Edit"
         />
@@ -118,6 +130,7 @@ function ConfirmationWO() {
           <Card.Body>
             <Card.Title className="text-center mb-5">Work Order</Card.Title>
             <ConfirmWOInput
+              user={user}
               form={form}
               isLoading={isLoading}
               lists={lists}

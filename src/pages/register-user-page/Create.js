@@ -5,7 +5,10 @@ import { postData } from "../../utils/fetch";
 import RegisterInput from "../../components/Register-Input/RegisterInput";
 import BreadCrumb from "../../components/Breadcrumb";
 import {
+  fetchListsDepartement,
   fetchListsGroup,
+  fetchListsPosisi,
+  fetchListsRoles,
 } from "../../redux/lists/actions";
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
@@ -20,8 +23,8 @@ const CreateUser = () => {
     name: "",
     email: "",
     password: "",
-    roles: "",
-    posisi: "",
+    roles: 0,
+    posisiId: 0,
     DepartementId: 0,
     GroupId: 0,
   });
@@ -35,12 +38,19 @@ const CreateUser = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    //dispatch(fetchListsDepartement());
+    dispatch(fetchListsDepartement());
     dispatch(fetchListsGroup());
+    dispatch(fetchListsPosisi());
+    dispatch(fetchListsRoles());
   }, [dispatch]);
 
   const handleChange = async (e) => {
-    if (e.target.name === "DepartementId" || e.target.name === "GroupId") {
+    if (
+      e.target.name === "DepartementId" ||
+      e.target.name === "GroupId" ||
+      e.target.name === "posisiId" ||
+      e.target.name === "roles"
+    ) {
       setForm({ ...form, [e.target.name]: e });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
@@ -55,8 +65,8 @@ const CreateUser = () => {
       name: form.name,
       email: form.email,
       password: form.password,
-      roles: form.roles,
-      posisi: form.posisi,
+      roles: form.roles.value,
+      posisiId: form.posisiId.value,
       DepartementId: form.DepartementId.value,
       GroupId: form.GroupId.value,
     };

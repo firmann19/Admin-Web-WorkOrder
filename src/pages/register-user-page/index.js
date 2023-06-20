@@ -18,15 +18,12 @@ import {
   setDepartement,
   setGroup,
 } from "../../redux/users/actions";
-import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import Navbar from "../../components/navbar";
 
 function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const notif = useSelector((state) => state.notif);
   const user = useSelector((state) => state.user);
   const lists = useSelector((state) => state.lists);
 
@@ -37,7 +34,7 @@ function RegisterPage() {
     },
     [dispatch],
     user.DepartementId,
-    user.GroupId
+    user.GroupId,
   );
 
   useEffect(() => {
@@ -102,15 +99,11 @@ function RegisterPage() {
         </Col>
       </Row>
 
-      {notif.status && (
-        <SAlert type={notif.typeNotif} message={notif.message} />
-      )}
-
       <Table
         status={user.status}
         thead={["Nama", "Email", "Posisi" ,   "Role", "Departement" , "Group", "Aksi"]}
         data={user.data}
-        tbody={["name", "email", "posisi",  "departmentName", "groupName", "roles", "Aksi"]}
+        tbody={["name", "email", "posisi",  "departmentName", "groupName", "role", "Aksi"]}
         editUrl={`/register-page/edit-user`}
         deleteAction={(id) => handleDelete(id)}
       />

@@ -29,7 +29,7 @@ export const errorFetchingCheckouts = () => {
 };
 
 export const fetchCheckouts = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(startFetchingCheckouts());
 
     try {
@@ -37,17 +37,43 @@ export const fetchCheckouts = () => {
         dispatch(clearNotif());
       }, 5000);
 
-      let res = await debouncedFetchCheckouts("/checkout");
-      console.log("test", res)
+     /* let params = {
+        page: getState().checkouts?.page || 0,
+        size: getState().checkouts?.size || 5,
+      }; */
 
-      for (const element of res.data.data.checkouts) {
-        element.userRequestName = element.User.name;
-        element.departUser = element.Departement.nama
+      let res = await debouncedFetchCheckouts("/checkout", /*params*/);
+      console.log("test", res);
+
+      for (const element of res.data.data.getAll_checkout) {
+        element.fullName = element.User.name;
+        element.departmentName = element.Departement.nama;
       };
+
+      /* let _temp = [];
+
+      res.data.data.checkouts.forEach((res) => {
+        _temp.push({
+          namaBarang: res.namaBarang,
+          kodeBarang: res.kodeBarang,
+          permasalahan: res.permasalahan,
+          tindakan: res.tindakan,
+          gantiSparepart: res.gantiSparepart,
+          UserRequestId: res.UserRequestId,
+          DepartUserId: res.DepartUserId,
+          UserApproveId: res.UserApproveId,
+          StatusWO: res.StatusWO,
+          date_requestWO: res.date_requestWO,
+          StatusPengerjaan: res.StatusPengerjaan,
+          date_completionWO: res.date_completionWO,
+        });
+      }); */
 
       dispatch(
         successFetchingCheckouts({
-          checkouts: res.data.data.checkouts,
+          checkouts: res.data.data.getAll_checkout
+          //checkouts: _temp,
+          //pages: res.data.data.pages,
         })
       );
     } catch (error) {

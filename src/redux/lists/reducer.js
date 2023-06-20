@@ -2,12 +2,18 @@ import {
   ERROR_FETCHING_LISTS_DEPARTEMENT,
   ERROR_FETCHING_LISTS_GROUP,
   ERROR_FETCHING_LISTS_HeadIT,
+  ERROR_FETCHING_LISTS_POSISI,
+  ERROR_FETCHING_LISTS_ROLES,
   START_FETCHING_LISTS_DEPARTEMENT,
   START_FETCHING_LISTS_GROUP,
   START_FETCHING_LISTS_HeadIT,
+  START_FETCHING_LISTS_POSISI,
+  START_FETCHING_LISTS_ROLES,
   SUCCESS_FETCHING_LISTS_DEPARTEMENT,
   SUCCESS_FETCHING_LISTS_GROUP,
   SUCCESS_FETCHING_LISTS_HeadIT,
+  SUCCESS_FETCHING_LISTS_POSISI,
+  SUCCESS_FETCHING_LISTS_ROLES,
 } from "./constants";
 
 const statuslist = {
@@ -22,6 +28,10 @@ const initialState = {
   statusDepartements: statuslist.idle,
   groups: [],
   statusGroups: statuslist.idle,
+  positions: [],
+  statusPosisi: statuslist.idle,
+  role: [],
+  statusRole: statuslist.idle,
   HeadIT: [],
   statusHeadIT: statuslist.idle,
 };
@@ -53,6 +63,32 @@ export default function reducer(state = initialState, action) {
         statusGroups: statuslist.success,
         groups: action.groups,
       };
+    
+    case START_FETCHING_LISTS_POSISI:
+      return { ...state, statusPosisi: statuslist.process };
+  
+    case ERROR_FETCHING_LISTS_POSISI:
+      return { ...state, statusPosisi: statuslist.error };
+  
+    case SUCCESS_FETCHING_LISTS_POSISI:
+      return {
+          ...state,
+          statusPosisi: statuslist.success,
+          positions: action.positions,
+        };
+      
+    case START_FETCHING_LISTS_ROLES:
+      return { ...state, statusRole: statuslist.process };
+    
+    case ERROR_FETCHING_LISTS_ROLES:
+      return { ...state, statusRole: statuslist.error };
+    
+    case SUCCESS_FETCHING_LISTS_ROLES:
+      return {
+          ...state,
+          statusRole: statuslist.success,
+          role: action.role,
+        };
 
     case START_FETCHING_LISTS_HeadIT:
       return { ...state, statusHeadIT: statuslist.process };

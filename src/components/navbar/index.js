@@ -24,7 +24,7 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "/login-page";
+    window.location.href = "/";
   };
 
   return (
@@ -55,6 +55,9 @@ function Navbar() {
               </NavLink>
               <NavLink to="/work-order-page" className="nav-item" activeClassName = "active">
                 Work Order
+              </NavLink>
+              <NavLink to="/changeSparepart-page" className="nav-item" activeClassName = "active">
+                Change Sparepart
               </NavLink>
               <NavLink to="/register-page" className="nav-item" activeClassName = "active">
                 Register User

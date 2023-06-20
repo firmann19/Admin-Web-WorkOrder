@@ -1,8 +1,9 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 
-function HistoryWOInput({ form, lists, handleChange }) {
+function HistoryWOInput({ form, handleSubmit, handleChange, isLoading }) {
   return (
+    <>
     <Form method="post" className="form-register">
       <Row className="mt-4 mb-4">
         <Col className="ms-2">
@@ -48,6 +49,32 @@ function HistoryWOInput({ form, lists, handleChange }) {
           <Form.Control
             name="KodeBarang"
             value={form?.kodeBarang}
+            type="text"
+            onChange={handleChange}
+            disabled
+            readOnly
+          />
+        </Col>
+      </Row>
+
+      <Row className="mt-4 mb-4">
+        <Col className="ms-2">
+          <Form.Label>Tanggal Work Order</Form.Label>
+          <Form.Control
+            name="date_requestWO"
+            value={form?.date_requestWO}
+            type="text"
+            onChange={handleChange}
+            disabled
+            readOnly
+          />
+        </Col>
+
+        <Col className="me-3">
+          <Form.Label>Tanggal Pengerjaan</Form.Label>
+          <Form.Control
+            name="KodeBarang"
+            value={form?.date_completionWO}
             type="text"
             onChange={handleChange}
             disabled
@@ -180,6 +207,7 @@ function HistoryWOInput({ form, lists, handleChange }) {
         </Col>
       </Row>
     </Form>
+      </>
   );
 }
 
