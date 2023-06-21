@@ -14,7 +14,7 @@ function EditUserInput({ form, lists, handleChange, handleSubmit, isLoading }) {
         value={form?.name}
         type="text"
         onChange={handleChange}
-   />
+      />
 
       <TextInputWithLabel
         placeholder={"Masukan email"}
@@ -30,7 +30,7 @@ function EditUserInput({ form, lists, handleChange, handleSubmit, isLoading }) {
           <SelectBox
             label={"Group"}
             placeholder={"Pilih group anda..."}
-            name="Group"
+            name="GroupId"
             isClearable={true}
             value={form.GroupId}
             options={lists.groups}
@@ -42,7 +42,7 @@ function EditUserInput({ form, lists, handleChange, handleSubmit, isLoading }) {
           <SelectBox
             label={"Departement"}
             placeholder={"Pilih departement anda..."}
-            name="Departement"
+            name="DepartementId"
             isClearable={true}
             value={form.DepartementId}
             options={lists.departements}
@@ -51,23 +51,31 @@ function EditUserInput({ form, lists, handleChange, handleSubmit, isLoading }) {
         </Col>
       </Row>
 
-      <TextInputWithLabel
-        placeholder={"Masukan Posisi..."}
-        label={"Posisi"}
-        name="posisi"
-        value={form?.posisi}
-        type="text"
-        onChange={handleChange}
-      />
+      <Row className="mt-4 mb-4">
+        <Col className="ms-2">
+          <SelectBox
+            label={"Posisi"}
+            placeholder={"Pilih posisi anda..."}
+            name="posisiId"
+            isClearable={true}
+            value={form.posisiId}
+            options={lists.positions}
+            handleChange={(e) => handleChange(e)}
+          />
+        </Col>
 
-      <TextInputWithLabel
-        placeholder={"Masukan Role..."}
-        label={"Role"}
-        name="roles"
-        value={form?.roles}
-        type="text"
-        onChange={handleChange}
-      />
+        <Col className="me-3">
+          <SelectBox
+            label={"Role"}
+            placeholder={"Pilih role anda..."}
+            name="roles"
+            isClearable={true}
+            value={form.roles}
+            options={lists.role}
+            handleChange={(e) => handleChange(e)}
+          />
+        </Col>
+      </Row>
 
       <TextInputWithLabel
         placeholder={"Masukan Password"}
@@ -78,15 +86,15 @@ function EditUserInput({ form, lists, handleChange, handleSubmit, isLoading }) {
         onChange={handleChange}
       />
       <div className="mx-auto w-25 mt-5">
-          <SButton
-            className="w-100"
-            loading={isLoading}
-            disabled={isLoading}
-            action={handleSubmit}
-            variant="danger"
-          >
-            Submit
-          </SButton>
+        <SButton
+          className="w-100"
+          loading={isLoading}
+          disabled={isLoading}
+          action={handleSubmit}
+          variant="danger"
+        >
+          Submit
+        </SButton>
       </div>
     </Form>
   );

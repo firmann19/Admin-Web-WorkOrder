@@ -208,7 +208,6 @@ export const fetchListsRoles = () => {
 };
 
 // User
-
 export const startFetchingListsHeadIT = () => {
   return {
     type: START_FETCHING_LISTS_HeadIT,

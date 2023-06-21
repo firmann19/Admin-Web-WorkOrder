@@ -46,7 +46,7 @@ export const fetchCheckouts = () => {
       console.log("test", res);
 
       for (const element of res.data.data.getAll_checkout) {
-        element.fullName = element.User.name;
+        element.fullName = element.userRequest.name;
         element.departmentName = element.Departement.nama;
       };
 

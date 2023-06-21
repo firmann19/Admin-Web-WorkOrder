@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   fetchListsDepartement,
   fetchListsGroup,
+  fetchListsPosisi,
+  fetchListsRoles,
 } from "../../redux/lists/actions";
 import { getData, putData } from "../../utils/fetch";
 import { toast } from "react-toastify";
@@ -24,9 +26,9 @@ function EditUser() {
     email: "",
     password: "",
     roles: "",
-    posisi: "",
-    DepartementId: 0,
-    GroupId: 0,
+    posisiId: "",
+    DepartementId: "",
+    GroupId: "",
   });
 
   const [alert, setAlert] = useState({
@@ -44,23 +46,37 @@ function EditUser() {
       ...form,
       name: res.data.data.getUser_ById.name,
       email: res.data.data.getUser_ById.email,
-      roles: res.data.data.getUser_ById.roles,
-      posisi: res.data.data.getUser_ById.posisi,
       DepartementId: {
-        label: res?.data?.data?.getUser_ById?.DepartementId,
+        label: res?.data?.data?.getUser_ById?.Departement.nama,
         target: {
           name: "DepartementId",
-          value: res?.data?.data?.getUser_ById?.DepartementId?.id
+          value: res?.data?.data?.getUser_ById?.Departement.id,
         },
-        value: res?.data?.data?.getUser_ById?.DepartementId?.id
+        value: res?.data?.data?.getUser_ById?.Departement.id,
       },
       GroupId: {
-        label: res?.data?.data?.getUser_ById?.GroupId,
+        label: res?.data?.data?.getUser_ById?.Group.nama,
         target: {
           name: "GroupId",
-          value: res?.data?.data?.getUser_ById?.GroupId?.id,
+          value: res?.data?.data?.getUser_ById?.Group.id,
         },
-        value: res?.data?.data?.getUser_ById?.GroupId?.id,
+        value: res?.data?.data?.getUser_ById?.Group.id,
+      },
+      posisiId: {
+        label: res?.data?.data?.getUser_ById?.Posisi.jabatan,
+        target: {
+          name: "posisiId",
+          value: res?.data?.data?.getUser_ById?.Posisi.id,
+        },
+        value: res?.data?.data?.getUser_ById?.Posisi.id,
+      },
+      roles: {
+        label: res?.data?.data?.getUser_ById?.Role.roleEmploye,
+        target: {
+          name: "RoleId",
+          value: res?.data?.data?.getUser_ById?.Role.id,
+        },
+        value: res?.data?.data?.getUser_ById?.Role.id,
       },
     });
   };
@@ -72,11 +88,20 @@ function EditUser() {
   useEffect(() => {
     dispatch(fetchListsDepartement());
     dispatch(fetchListsGroup());
+    dispatch(fetchListsPosisi());
+    dispatch(fetchListsRoles());
   }, [dispatch]);
 
   const handleChange = async (e) => {
-    if (e.target.name === "DepartementId" || e.target.name === "GroupId") {
+    if (
+      e.target.name === "DepartementId" ||
+      e.target.name === "GroupId" ||
+      e.target.name === "posisiId" ||
+      e.target.name === "roles"
+    ) {
       setForm({ ...form, [e.target.name]: e });
+      console.log("e.target.name");
+      console.log(e.target.name);
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
@@ -89,8 +114,8 @@ function EditUser() {
       name: form.name,
       email: form.email,
       password: form.password,
-      roles: form.roles,
-      posisi: form.posisi,
+      roles: form.roles.value,
+      posisiId: form.posisiId.value,
       DepartementId: form.DepartementId.value,
       GroupId: form.GroupId.value,
     };
@@ -98,9 +123,7 @@ function EditUser() {
     await putData(`/user/${id}`, payload)
       .then((res) => {
         if (res.data.status === true) {
-          toast.success(
-            `Berhasil update user`
-          );
+          toast.success(`Berhasil update user`);
           navigate("/register-page");
           setIsLoading(false);
         } else {

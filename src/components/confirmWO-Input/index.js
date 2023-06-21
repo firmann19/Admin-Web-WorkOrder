@@ -134,13 +134,12 @@ function ConfirmWOInput({
       </Form.Group>
 
       <SButton
-          className="w-40"
-          variant="primary"
-          href="/create-changeSparepart"
-        >
-          Ajukan Pergantian
-        </SButton>
-        
+        className="w-40"
+        variant="primary"
+        href="/create-changeSparepart"
+      >
+        Ajukan Pergantian
+      </SButton>
 
       <Row className="mt-4 mb-4">
         <Col className="ms-2">
@@ -178,15 +177,14 @@ function ConfirmWOInput({
           />
         </Col>
 
-        <Col className="me-3">
-          <SelectBox
-            label={"Diketahui"}
-            placeholder={"Pilih..."}
+        <Col className="ms-2">
+          <Form.Label>Diketahui</Form.Label>
+          <Form.Control
             name="HeadITid"
-            isClearable={true}
-            value={form.HeadITid}
-            options={lists.HeadIT}
-            handleChange={(e) => handleChange(e)}
+            value={form?.HeadITid}
+            type="text"
+            readOnly
+            disabled
           />
         </Col>
       </Row>

@@ -26,11 +26,11 @@ function ConfirmationWO() {
     namaBarang: "",
     kodeBarang: "",
     permasalahan: "",
-    UserApproveId: 0,
+    UserApproveId: "",
     tindakan: "",
     gantiSparepart: "",
-    HeadITid: 0,
-    User_IT: 0,
+    HeadITid: "",
+    User_IT: "",
     date_completionWO: "",
   });
 
@@ -48,12 +48,13 @@ function ConfirmationWO() {
 
     setForm({
       ...form,
-      UserRequestId: res.data.data.getCheckout_ById.UserRequestId,
-      DepartUserId: res.data.data.getCheckout_ById.DepartUserId,
+      UserRequestId: res.data.data.getCheckout_ById.userRequest.name,
+      DepartUserId: res.data.data.getCheckout_ById.Departement.nama,
       namaBarang: res.data.data.getCheckout_ById.namaBarang,
       kodeBarang: res.data.data.getCheckout_ById.kodeBarang,
       permasalahan: res.data.data.getCheckout_ById.permasalahan,
-      UserApproveId: res.data.data.getCheckout_ById.UserApproveId,
+      UserApproveId: res.data.data.getCheckout_ById.userApprove.name,
+      HeadITid: res.data.data.getCheckout_ById.HeadIT.name,
     });
   };
 
@@ -91,7 +92,7 @@ function ConfirmationWO() {
       UserApproveId: form.UserApproveId,
       tindakan: form.tindakan,
       gantiSparepart: form.gantiSparepart,
-      HeadITid: form.HeadITid.value,
+      HeadITid: form.HeadITid,
       User_IT: idUser,
       date_completionWO: form.date_completionWO,
     };
