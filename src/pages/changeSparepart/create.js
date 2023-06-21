@@ -7,9 +7,12 @@ import ChangeSparepartInput from "../../components/changeSparepart-Input";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../utils/fetch";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 function CreateChangeSparepart() {
   const navigate = useNavigate();
+  const [getManager, setGetManager] = useState(null);
+  const [getNameManager, setGetNameManager] = useState(null);
   const [form, setForm] = useState({
     userRequestWo: "",
     departementUser: "",
@@ -19,6 +22,17 @@ function CreateChangeSparepart() {
     alasan: "",
     HeadIT: "",
   });
+
+  useEffect(() => {
+    const fecthData = () => {
+      let { getManager, getNameManager } = localStorage.getItem("auth")
+        ? JSON.parse(localStorage.getItem("auth"))
+        : {};
+      setGetManager(getManager);
+      setGetNameManager(getNameManager)
+    };
+    fecthData();
+  }, []);
 
   const [alert, setAlert] = useState({
     status: false,
@@ -42,7 +56,7 @@ function CreateChangeSparepart() {
       harga: form.harga,
       jumlahOrder: form.jumlahOrder,
       alasan: form.alasan,
-      HeadIT: form.HeadIT,
+      HeadIT: getManager,
     };
 
     await postData(`/changeSparepart`, payload)
@@ -81,6 +95,7 @@ function CreateChangeSparepart() {
             </Card.Title>
             <ChangeSparepartInput
               form={form}
+              getNameManager={getNameManager}
               isLoading={isLoading}
               handleChange={handleChange}
               handleSubmit={handleSubmit}

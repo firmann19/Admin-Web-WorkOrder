@@ -5,6 +5,7 @@ import SelectBox from "../selectBox";
 
 function ChangeSparepartInput({
   form,
+  getNameManager,
   handleChange,
   handleSubmit,
   isLoading,
@@ -70,9 +71,10 @@ function ChangeSparepartInput({
         <Form.Label>Manager IT</Form.Label>
           <Form.Control
             name="HeadIT"
-            value={form?.HeadIT}
+            value={getNameManager}
             type="text"
-            onChange={handleChange}
+            readOnly
+            disabled
           />
         </Col>
       </Row>
