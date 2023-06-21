@@ -17,6 +17,8 @@ function ConfirmationWO() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [user, setUser] = useState(null);
+  const [getManager, setGetManager] = useState(null);
+  const [getNameManager, setGetNameManager] = useState(null);
   const [idUser, setId] = useState(null);
   const lists = useSelector((state) => state.lists);
   const { id } = useParams();
@@ -54,7 +56,6 @@ function ConfirmationWO() {
       kodeBarang: res.data.data.getCheckout_ById.kodeBarang,
       permasalahan: res.data.data.getCheckout_ById.permasalahan,
       UserApproveId: res.data.data.getCheckout_ById.userApprove.name,
-      HeadITid: res.data.data.getCheckout_ById.HeadIT.name,
     });
   };
 
@@ -63,21 +64,19 @@ function ConfirmationWO() {
     fetchOneWO();
 
     const fecthData = () => {
-      let { user, idUser } = localStorage.getItem("auth")
+      let { user, idUser, getManager, getNameManager } = localStorage.getItem("auth")
         ? JSON.parse(localStorage.getItem("auth"))
         : {};
       setUser(user);
       setId(idUser);
+      setGetManager(getManager);
+      setGetNameManager(getNameManager)
     };
     fecthData();
   }, [dispatch]);
 
   const handleChange = async (e) => {
-    if (e.target.name === "HeadITid") {
-      setForm({ ...form, [e.target.name]: e });
-    } else {
       setForm({ ...form, [e.target.name]: e.target.value });
-    }
   };
 
   const handleSubmit = async () => {
@@ -92,7 +91,7 @@ function ConfirmationWO() {
       UserApproveId: form.UserApproveId,
       tindakan: form.tindakan,
       gantiSparepart: form.gantiSparepart,
-      HeadITid: form.HeadITid,
+      HeadITid: getManager,
       User_IT: idUser,
       date_completionWO: form.date_completionWO,
     };
@@ -127,11 +126,12 @@ function ConfirmationWO() {
         <div className="m-auto" style={{ width: "50%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
-        <Card style={{ width: "60%" }} className="m-auto mt-5">
+        <Card style={{ width: "80%" }} className="m-auto mt-5 mb-5">
           <Card.Body>
             <Card.Title className="text-center mb-5">Work Order</Card.Title>
             <ConfirmWOInput
               user={user}
+              getNameManager={getNameManager}
               form={form}
               isLoading={isLoading}
               lists={lists}

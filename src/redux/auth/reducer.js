@@ -2,7 +2,14 @@ import { USER_LOGIN, USER_LOGOUT } from "./constants";
 
 let initialState = localStorage.getItem("auth")
   ? JSON.parse(localStorage.getItem("auth"))
-  : { token: null, user: null, role: null, idUser: null };
+  : {
+      token: null,
+      user: null,
+      role: null,
+      idUser: null,
+      getManager: null,
+      getNameManager: null,
+    };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -12,10 +19,19 @@ export default function reducer(state = initialState, action) {
         user: action.user,
         role: action.role,
         idUser: action.idUser,
+        getManager: action.getManager,
+        getNameManager: action.getNameManager,
       };
 
     case USER_LOGOUT:
-      return { token: null, user: null, role: null, idUser: null };
+      return {
+        token: null,
+        user: null,
+        role: null,
+        idUser: null,
+        getManager: null,
+        getNameManager: null,
+      };
 
     default:
       return state;

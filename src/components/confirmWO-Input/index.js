@@ -1,11 +1,10 @@
 import React from "react";
 import SButton from "../Button";
 import { Col, Form, Row } from "react-bootstrap";
-import SelectBox from "../selectBox";
 
 function ConfirmWOInput({
   form,
-  lists,
+  getNameManager,
   user,
   handleChange,
   handleSubmit,
@@ -181,7 +180,7 @@ function ConfirmWOInput({
           <Form.Label>Diketahui</Form.Label>
           <Form.Control
             name="HeadITid"
-            value={form?.HeadITid}
+            value={getNameManager}
             type="text"
             readOnly
             disabled

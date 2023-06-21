@@ -39,7 +39,9 @@ function LoginPage() {
           res.data.data.token,
           res.data.data.user,
           res.data.data.role,
-          res.data.data.idUser
+          res.data.data.idUser,
+          res.data.data.getManager,
+          res.data.data.getNameManager
         )
       );
 
