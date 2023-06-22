@@ -41,7 +41,8 @@ function LoginPage() {
           res.data.data.role,
           res.data.data.idUser,
           res.data.data.getManager,
-          res.data.data.getNameManager
+          res.data.data.getNameManager,
+          res.data.data.getCountWO
         )
       );
 

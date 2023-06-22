@@ -63,7 +63,7 @@ function CreateChangeSparepart() {
       .then((res) => {
         if (res.data.status === true) {
           toast.success(res.data.message);
-          navigate("/work-order-page");
+          navigate("/changeSparepart-page");
           setIsLoading(false);
         } else {
           setIsLoading(true);

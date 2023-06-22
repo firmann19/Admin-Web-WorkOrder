@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 
-function HistoryChangeInput({ form }) {
+function HistoryChangeInput({ form, getNameManager }) {
   return (
     <Form method="post" className="form-register">
       <Row className="mt-4 mb-4">
@@ -68,7 +68,7 @@ function HistoryChangeInput({ form }) {
           <Form.Label>Manager IT</Form.Label>
           <Form.Control
             name="HeadIT"
-            value={form?.HeadIT}
+            value={getNameManager}
             type="text"
             readOnly
             disabled

@@ -12,6 +12,7 @@ import HistoryChangeInput from "../../components/HistoryChangeSparepart-input";
 
 function HistoryChangeSparepart() {
   const { id } = useParams();
+  const [getNameManager, setGetNameManager] = useState(null);
   const [form, setForm] = useState({
     userRequestWo: "",
     departementUser: "",
@@ -45,6 +46,13 @@ function HistoryChangeSparepart() {
   };
 
   useEffect(() => {
+    const fecthData = () => {
+      let { getNameManager } = localStorage.getItem("auth")
+        ? JSON.parse(localStorage.getItem("auth"))
+        : {};
+      setGetNameManager(getNameManager)
+    };
+    fecthData();
     fetchOne();
   }, []);
 
@@ -55,7 +63,7 @@ function HistoryChangeSparepart() {
         <BreadCrumb
           textSecound={"Change Sparepart"}
           urlSecound={"/changeSparepart-page"}
-          textThird="Edit"
+          textThird="Detail"
         />
         <div className="m-auto" style={{ width: "50%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
@@ -63,7 +71,7 @@ function HistoryChangeSparepart() {
         <Card style={{ width: "60%" }} className="m-auto mt-5">
           <Card.Body>
             <Card.Title className="text-center mb-5">Work Order</Card.Title>
-            <HistoryChangeInput form={form} />
+            <HistoryChangeInput form={form} getNameManager={getNameManager} />
           </Card.Body>
         </Card>
       </Container>

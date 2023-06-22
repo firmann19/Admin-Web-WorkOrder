@@ -25,7 +25,7 @@ const rootReducers = combineReducers({
   departements : departementsReducer,
   groups: groupsReducer,
   checkouts: checkoutReducer,
-  pengajuans: pengajuanReducer
+  pengajuans: pengajuanReducer,
 });
 const store = createStore(
   rootReducers,
