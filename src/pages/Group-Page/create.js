@@ -35,18 +35,9 @@ function CreateGroup() {
 
     await postData(`/group`, payload)
       .then((res) => {
-        if (res.data.status === true) {
-          toast.success(res.data.message);
+          toast.success('Berhasil Tambah Group');
           navigate("/group-page");
           setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
       })
       .catch((err) => console.log("ini error", err));
   };

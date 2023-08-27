@@ -42,7 +42,7 @@ export const fetchPengajuan = () => {
 
       dispatch(
         successFetchingPengajuan({
-          pengajuans: res.data.data.getAll_ChangeSparepart,
+          pengajuans: res.data.data,
         })
       );
     } catch (error) {

@@ -38,18 +38,8 @@ function CreateDepartement() {
 
     await postData(`/departement`, payload)
       .then((res) => {
-        if (res.data.status === true) {
-          toast.success(res.data.message);
-          navigate("/departement-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
+        toast.success('Berhasil tambah Departement');
+        navigate("/departement-page");
       })
       .catch((err) => console.log("ini errror", err));
   };

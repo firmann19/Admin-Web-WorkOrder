@@ -41,7 +41,7 @@ export const fetchGroups = () => {
 
       dispatch(
         successFetchingGroups({
-          groups: res.data.data.getAll_group,
+          groups: res.data.data,
         })
       );
     } catch (error) {

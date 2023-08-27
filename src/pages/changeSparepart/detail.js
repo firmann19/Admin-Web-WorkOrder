@@ -35,13 +35,13 @@ function HistoryChangeSparepart() {
 
     setForm({
       ...form,
-      userRequestWo: res.data.data.getChangeSparepart_ById.userRequestWo,
-      departementUser: res.data.data.getChangeSparepart_ById.departementUser,
-      namaSparepart: res.data.data.getChangeSparepart_ById.namaSparepart,
-      harga: res.data.data.getChangeSparepart_ById.harga,
-      jumlahOrder: res.data.data.getChangeSparepart_ById.jumlahOrder,
-      alasan: res.data.data.getChangeSparepart_ById.alasan,
-      HeadIT: res.data.data.getChangeSparepart_ById.HeadIT,
+      userRequestWo: res.data.data.userRequestWo,
+      departementUser: res.data.data.departementUser,
+      namaSparepart: res.data.data.namaSparepart,
+      harga: res.data.data.harga,
+      jumlahOrder: res.data.data.jumlahOrder,
+      alasan: res.data.data.alasan,
+      HeadIT: res.data.data.HeadIT,
     });
   };
 

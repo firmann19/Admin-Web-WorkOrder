@@ -55,7 +55,7 @@ export const fetchListsDepartement = () => {
 
       let _temp = [];
 
-      res.data.data.getAll_departement.forEach((res) => {
+      res.data.data.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.nama,
@@ -104,7 +104,7 @@ export const fetchListsGroup = () => {
 
       let _temp = [];
 
-      res.data.data.getAll_group.forEach((res) => {
+      res.data.data.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.nama,
@@ -148,7 +148,7 @@ export const fetchListsPosisi = () => {
 
       let _temp = [];
 
-      res.data.data.getAll_posisi.forEach((res) => {
+      res.data.data.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.jabatan,
@@ -192,7 +192,7 @@ export const fetchListsRoles = () => {
 
       let _temp = [];
 
-      res.data.data.getAll_Role.forEach((res) => {
+      res.data.data.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.roleEmploye,
@@ -236,7 +236,7 @@ export const fetchListsHeadIT = () => {
 
       let _temp = [];
 
-      res.data.data.getAllApprove_users.forEach((res) => {
+      res.data.data.forEach((res) => {
         _temp.push({
           value: res.id,
           label: res.name,

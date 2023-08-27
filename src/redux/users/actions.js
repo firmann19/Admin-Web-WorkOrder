@@ -43,7 +43,7 @@ export const fetchUsers = () => {
       let res = await debouncedFetchUsers("/user");
       console.log("test", res)
 
-      for (const element of res.data.data.getAll_users) {
+      for (const element of res.data.data) {
         element.posisi = element.Posisi.jabatan;
         element.role = element.Role.roleEmploye;
         element.departmentName = element.Departement.nama;
@@ -52,7 +52,7 @@ export const fetchUsers = () => {
       
       dispatch(
         successFetchingUsers({
-          users: res.data.data.getAll_users,
+          users: res.data.data,
         })
       );
     } catch (error) {

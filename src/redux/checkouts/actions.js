@@ -45,7 +45,7 @@ export const fetchCheckouts = () => {
       let res = await debouncedFetchCheckouts("/checkout", /*params*/);
       console.log("test", res);
 
-      for (const element of res.data.data.getAll_checkout) {
+      for (const element of res.data.data) {
         element.fullName = element.userRequest.name;
         element.departmentName = element.Departement.nama;
       };
@@ -71,7 +71,7 @@ export const fetchCheckouts = () => {
 
       dispatch(
         successFetchingCheckouts({
-          checkouts: res.data.data.getAll_checkout
+          checkouts: res.data.data
           //checkouts: _temp,
           //pages: res.data.data.pages,
         })

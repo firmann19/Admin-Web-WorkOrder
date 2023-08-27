@@ -29,7 +29,7 @@ function EditGroup() {
 
     setForm({
       ...form,
-      nama: res.data.data.getGroup_ById.nama,
+      nama: res.data.data.nama,
     });
   };
 

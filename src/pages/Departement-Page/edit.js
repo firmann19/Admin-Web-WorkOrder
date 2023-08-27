@@ -29,7 +29,7 @@ function EditDepartement() {
 
     setForm({
       ...form,
-      nama: res.data.data.getDepartement_ById.nama,
+      nama: res.data.data.nama,
     });
   };
 

@@ -44,39 +44,39 @@ function EditUser() {
 
     setForm({
       ...form,
-      name: res.data.data.getUser_ById.name,
-      email: res.data.data.getUser_ById.email,
+      name: res.data.data.name,
+      email: res.data.data.email,
       DepartementId: {
-        label: res?.data?.data?.getUser_ById?.Departement.nama,
+        label: res?.data?.data?.Departement.nama,
         target: {
           name: "DepartementId",
-          value: res?.data?.data?.getUser_ById?.Departement.id,
+          value: res?.data?.data?.Departement.id,
         },
-        value: res?.data?.data?.getUser_ById?.Departement.id,
+        value: res?.data?.data?.Departement.id,
       },
       GroupId: {
-        label: res?.data?.data?.getUser_ById?.Group.nama,
+        label: res?.data?.data?.Group.nama,
         target: {
           name: "GroupId",
-          value: res?.data?.data?.getUser_ById?.Group.id,
+          value: res?.data?.data?.Group.id,
         },
-        value: res?.data?.data?.getUser_ById?.Group.id,
+        value: res?.data?.data?.Group.id,
       },
       posisiId: {
-        label: res?.data?.data?.getUser_ById?.Posisi.jabatan,
+        label: res?.data?.data?.Posisi.jabatan,
         target: {
           name: "posisiId",
-          value: res?.data?.data?.getUser_ById?.Posisi.id,
+          value: res?.data?.data?.Posisi.id,
         },
-        value: res?.data?.data?.getUser_ById?.Posisi.id,
+        value: res?.data?.data?.Posisi.id,
       },
       roles: {
-        label: res?.data?.data?.getUser_ById?.Role.roleEmploye,
+        label: res?.data?.data?.Role.roleEmploye,
         target: {
           name: "RoleId",
-          value: res?.data?.data?.getUser_ById?.Role.id,
+          value: res?.data?.data?.Role.id,
         },
-        value: res?.data?.data?.getUser_ById?.Role.id,
+        value: res?.data?.data?.Role.id,
       },
     });
   };

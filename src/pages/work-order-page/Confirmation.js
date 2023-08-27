@@ -50,12 +50,12 @@ function ConfirmationWO() {
 
     setForm({
       ...form,
-      UserRequestId: res.data.data.getCheckout_ById.userRequest.name,
-      DepartUserId: res.data.data.getCheckout_ById.Departement.nama,
-      namaBarang: res.data.data.getCheckout_ById.namaBarang,
-      kodeBarang: res.data.data.getCheckout_ById.kodeBarang,
-      permasalahan: res.data.data.getCheckout_ById.permasalahan,
-      UserApproveId: res.data.data.getCheckout_ById.userApprove.name,
+      UserRequestId: res.data.data.userRequest.name,
+      DepartUserId: res.data.data.Departement.nama,
+      namaBarang: res.data.data.namaBarang,
+      kodeBarang: res.data.data.kodeBarang,
+      permasalahan: res.data.data.permasalahan,
+      UserApproveId: res.data.data.userApprove.name,
     });
   };
 

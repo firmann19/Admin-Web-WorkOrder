@@ -41,7 +41,7 @@ export const fetchDepartements = () => {
 
       dispatch(
         successFetchingDepartements({
-          departements: res.data.data.getAll_departement,
+          departements: res.data.data,
         })
       );
     } catch (error) {
