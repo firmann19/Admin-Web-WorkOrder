@@ -8,10 +8,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { getData, putData } from "../../utils/fetch";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListsHeadIT } from "../../redux/lists/actions";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
 
 function ConfirmationWO() {
   const navigate = useNavigate();
@@ -96,22 +96,26 @@ function ConfirmationWO() {
       date_completionWO: form.date_completionWO,
     };
 
-    await putData(`/checkout/${id}`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(`Berhasil konfirmasi Work Order`);
-          navigate("/work-order-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await putData(`/checkout/${id}`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil konfirmasi Work Order ${res.data.data.userRequest.name}`
+        )
+      );
+      navigate("/work-order-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (
@@ -123,7 +127,7 @@ function ConfirmationWO() {
           urlSecound={"/work-order-page"}
           textThird="Edit"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
+        <div className="m-auto" style={{ width: "80%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
         <Card style={{ width: "80%" }} className="m-auto mt-5 mb-5">

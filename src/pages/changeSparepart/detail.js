@@ -23,12 +23,6 @@ function HistoryChangeSparepart() {
     HeadIT: "",
   });
 
-  const [alert, setAlert] = useState({
-    status: false,
-    type: "",
-    message: "",
-  });
-
   const fetchOne = async () => {
     const res = await getData(`/changeSparepart/${id}`);
     console.log("test", res);
@@ -65,9 +59,7 @@ function HistoryChangeSparepart() {
           urlSecound={"/changeSparepart-page"}
           textThird="Detail"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
-          {alert.status && <SAlert type={alert.type} message={alert.message} />}
-        </div>
+
         <Card style={{ width: "60%" }} className="m-auto mt-5">
           <Card.Body>
             <Card.Title className="text-center mb-5">Work Order</Card.Title>

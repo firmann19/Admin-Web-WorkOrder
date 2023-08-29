@@ -15,6 +15,7 @@ import SAlert from "../../components/Alert";
 import BreadCrumb from "../../components/Breadcrumb";
 import EditUserInput from "../../components/EditUser-Input/EditUserInput";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
 
 function EditUser() {
   const navigate = useNavigate();
@@ -120,22 +121,26 @@ function EditUser() {
       GroupId: form.GroupId.value,
     };
 
-    await putData(`/user/${id}`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(`Berhasil update user`);
-          navigate("/register-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await putData(`/user/${id}`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil update user ${res.data.data.name}`
+        )
+      );
+      navigate("/register-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (
@@ -147,7 +152,7 @@ function EditUser() {
           urlSecound={"/register-page"}
           textThird="Edit"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
+        <div className="m-auto" style={{ width: "60%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
         <Card style={{ width: "60%" }} className="m-auto mt-5 mb-5">

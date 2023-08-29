@@ -5,6 +5,7 @@ import SearchInput from "../../components/SearchInput";
 import Table from "../../components/TableWithAction";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button";
+import SAlert from "../../components/Alert";
 import Swal from "sweetalert2";
 import { putData } from "../../utils/fetch";
 import { setNotif } from "../../redux/notif/actions";
@@ -13,6 +14,8 @@ import { fetchPengajuan } from "../../redux/pengajuan/actions";
 
 function ChangeSparepartPage() {
   const dispatch = useDispatch();
+  
+  const notif = useSelector((state) => state.notif);
   const pengajuans = useSelector((state) => state.pengajuans);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ function ChangeSparepartPage() {
           setNotif(
             true,
             "success",
-            `berhasil ubah status event ${res.data.data.title}`
+            `berhasil ubah status ChangeSparepart ${res.data.data.namaSparepart}`
           )
         );
 
@@ -72,7 +75,7 @@ function ChangeSparepartPage() {
           setNotif(
             true,
             "success",
-            `berhasil ubah status event ${res.data.data.title}`
+            `berhasil ubah status ChangeSparepart ${res.data.data.namaSparepart}`
           )
         );
 
@@ -91,6 +94,11 @@ function ChangeSparepartPage() {
           <SearchInput />
         </Col>
       </Row>
+
+      {notif.status && (
+        <SAlert type={notif.typeNotif} message={notif.message} />
+      )}
+
       <Table
         status={pengajuans.status}
         thead={["Nama", "Departemen", "Sparepart", "Status", "Aksi"]}

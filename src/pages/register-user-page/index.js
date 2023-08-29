@@ -4,7 +4,9 @@ import Button from "../../components/Button";
 import SelectBox from "../../components/selectBox";
 import BreadCrumb from "../../components/Breadcrumb";
 import Table from "../../components/TableWithAction";
+import { setNotif } from "../../redux/notif/actions";
 import SearchInput from "../../components/SearchInput";
+import SAlert from "../../components/Alert";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,12 +20,13 @@ import {
   setDepartement,
   setGroup,
 } from "../../redux/users/actions";
-import { toast } from "react-toastify";
 import Navbar from "../../components/navbar";
 
 function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const notif = useSelector((state) => state.notif);
   const user = useSelector((state) => state.user);
   const lists = useSelector((state) => state.lists);
 
@@ -54,12 +57,14 @@ function RegisterPage() {
       cancelButtonText: "Batal",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteData(`/user/${id}`).then((res) => {
-          if (res.data.status === true) {
-            toast.success(res.data.message);
-            navigate("/register-page");
-          }
-        });
+        const res = await deleteData(`/user/${id}`);
+        dispatch(
+          setNotif(
+            true,
+            "success",
+            `berhasil hapus user ${res.data.data.name}`
+          )
+        );
         dispatch(fetchUsers());
       }
     });
@@ -98,6 +103,10 @@ function RegisterPage() {
           />
         </Col>
       </Row>
+
+      {notif.status && (
+        <SAlert type={notif.typeNotif} message={notif.message} />
+      )}
 
       <Table
         status={user.status}

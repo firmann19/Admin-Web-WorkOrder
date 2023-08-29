@@ -4,17 +4,20 @@ import Button from "../../components/Button";
 import BreadCrumb from "../../components/Breadcrumb";
 import Table from "../../components/TableWithAction";
 import SearchInput from "../../components/SearchInput";
+import SAlert from "../../components/Alert";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteData } from "../../utils/fetch";
-import { toast } from "react-toastify";
 import { fetchDepartements } from "../../redux/departements/actions";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
 
 function DepartementPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const notif = useSelector((state) => state.notif);
   const departements = useSelector((state) => state.departements);
 
   useEffect(() => {
@@ -33,12 +36,14 @@ function DepartementPage() {
       cancelButtonText: "Batal",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteData(`/departement/${id}`).then((res) => {
-          if (res.data.status === true) {
-            toast.success(res.data.message);
-            navigate("/departement-page");
-          }
-        });
+        const res = await deleteData(`/departement/${id}`);
+        dispatch(
+          setNotif(
+            true,
+            "success",
+            `berhasil hapus departement ${res.data.data.nama}`
+          )
+        );
         dispatch(fetchDepartements());
       }
     });
@@ -57,6 +62,10 @@ function DepartementPage() {
           <SearchInput />
         </Col>
       </Row>
+
+      {notif.status && (
+        <SAlert type={notif.typeNotif} message={notif.message} />
+      )}
 
       <Table
         status={departements.status}

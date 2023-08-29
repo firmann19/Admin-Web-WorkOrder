@@ -5,12 +5,14 @@ import { getData, putData } from "../../utils/fetch";
 import BreadCrumb from "../../components/Breadcrumb";
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
-import { toast } from "react-toastify";
 import GroupInput from "../../components/Group-Input/GroupInput";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
+import { useDispatch } from "react-redux";
 
 function EditGroup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [form, setForm] = useState({
     nama: "",
@@ -48,22 +50,26 @@ function EditGroup() {
       nama: form.nama,
     };
 
-    await putData(`/group/${id}`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(`Berhasil update group`);
-          navigate("/group-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await putData(`/group/${id}`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil update Group ${res.data.data.nama}`
+        )
+      );
+      navigate("/group-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (

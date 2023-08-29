@@ -9,6 +9,7 @@ import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import DepartementInput from "../../components/Departement-Input/DepartementInput";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
 
 function CreateDepartement() {
   const navigate = useNavigate();
@@ -36,12 +37,26 @@ function CreateDepartement() {
       nama: form.nama,
     };
 
-    await postData(`/departement`, payload)
-      .then((res) => {
-        toast.success('Berhasil tambah Departement');
-        navigate("/departement-page");
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await postData(`/departement`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil tambah departement ${res.data.data.nama}`
+        )
+      );
+      navigate("/departement-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
   return (
     <>
@@ -52,7 +67,7 @@ function CreateDepartement() {
           urlSecound={"/departement-page"}
           textThird="Create"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
+        <div className="m-auto" style={{ width: "60%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
         <Card style={{ width: "60%" }} className="m-auto mt-5">

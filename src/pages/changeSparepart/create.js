@@ -6,11 +6,13 @@ import BreadCrumb from "../../components/Breadcrumb";
 import ChangeSparepartInput from "../../components/changeSparepart-Input";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../utils/fetch";
-import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { setNotif } from "../../redux/notif/actions";
+import { useDispatch } from "react-redux";
 
 function CreateChangeSparepart() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [getManager, setGetManager] = useState(null);
   const [getNameManager, setGetNameManager] = useState(null);
   const [form, setForm] = useState({
@@ -29,7 +31,7 @@ function CreateChangeSparepart() {
         ? JSON.parse(localStorage.getItem("auth"))
         : {};
       setGetManager(getManager);
-      setGetNameManager(getNameManager)
+      setGetNameManager(getNameManager);
     };
     fecthData();
   }, []);
@@ -59,22 +61,26 @@ function CreateChangeSparepart() {
       HeadIT: getManager,
     };
 
-    await postData(`/changeSparepart`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(res.data.message);
-          navigate("/changeSparepart-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini error", err));
+    const res = await postData(`/changeSparepart`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil tambah ChangeSparepart ${res.data.data.namaSparepart}`
+        )
+      );
+      navigate("/changeSparepart-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
   return (
     <>
@@ -85,7 +91,7 @@ function CreateChangeSparepart() {
           urlSecound={"/work-order-page"}
           textThird="Change Sparepart"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
+        <div className="m-auto" style={{ width: "60%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
         <Card style={{ width: "60%" }} className="m-auto mt-5 mb-5">

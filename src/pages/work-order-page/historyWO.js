@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { Card, Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { getData, putData } from "../../utils/fetch";
@@ -9,12 +9,14 @@ import HistoryWOInput from "../../components/HistoryWO-Input";
 import Navbar from "../../components/navbar";
 import moment from "moment";
 import SButton from "../../components/Button";
-import { toast } from "react-toastify";
 import ApproveImg from "../../assets/images/approve-task.jpg";
+import { setNotif } from "../../redux/notif/actions";
+import { useDispatch } from "react-redux";
 
 function HistoryWO() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     UserRequestId: "",
     DepartUserId: "",
@@ -32,6 +34,12 @@ function HistoryWO() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [alert, setAlert] = useState({
+    status: false,
+    type: "",
+    message: "",
+  });
 
   const fetchOneWO = async () => {
     const res = await getData(`/checkout/${id}`);
@@ -68,22 +76,26 @@ function HistoryWO() {
       statusPengerjaan: form.statusPengerjaan,
     };
 
-    await putData(`/statusProgress/${id}`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(`Berhasil konfirmasi Work Order`);
-          navigate("/work-order-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await putData(`/statusProgress/${id}`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil Close Work Order ${res.data.data.userRequest.name}`
+        )
+      );
+      navigate("/work-order-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../utils/fetch";
 import BreadCrumb from "../../components/Breadcrumb";
@@ -7,9 +7,12 @@ import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import GroupInput from "../../components/Group-Input/GroupInput";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
+import { useDispatch } from "react-redux";
 
 function CreateGroup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     nama: "",
   });
@@ -33,13 +36,26 @@ function CreateGroup() {
       nama: form.nama,
     };
 
-    await postData(`/group`, payload)
-      .then((res) => {
-          toast.success('Berhasil Tambah Group');
-          navigate("/group-page");
-          setIsLoading(false);
-      })
-      .catch((err) => console.log("ini error", err));
+    const res = await postData(`/group`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil tambah group ${res.data.data.nama}`
+        )
+      );
+      navigate("/group-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (
@@ -51,7 +67,7 @@ function CreateGroup() {
         urlSecound={"/group-page"}
         textThird="Create"
       />
-      <div className="m-auto" style={{ width: "50%" }}>
+      <div className="m-auto" style={{ width: "60%" }}>
         {alert.status && <SAlert type={alert.type} message={alert.message} />}
       </div>
       <Card style={{ width: "60%" }} className="m-auto mt-5">

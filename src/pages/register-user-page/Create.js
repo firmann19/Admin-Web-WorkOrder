@@ -12,8 +12,8 @@ import {
 } from "../../redux/lists/actions";
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
-import { toast } from "react-toastify";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
 
 const CreateUser = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const CreateUser = () => {
     GroupId: 0,
   });
 
-  const [alert] = useState({
+  const [alert, setAlert] = useState({
     status: false,
     type: "",
     message: "",
@@ -71,22 +71,26 @@ const CreateUser = () => {
       GroupId: form.GroupId.value,
     };
 
-    await postData(`/auth/signup`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(res.data.message);
-          navigate("/register-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await postData(`/auth/signup`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil tambah user ${res.data.data.name}`
+        )
+      );
+      navigate("/register-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (
@@ -98,7 +102,7 @@ const CreateUser = () => {
           urlSecound={"/register-page"}
           textThird="Create"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
+        <div className="m-auto" style={{ width: "60%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
         <Card style={{ width: "60%" }} className="m-auto mt-5">

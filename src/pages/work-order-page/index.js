@@ -5,6 +5,7 @@ import SelectBox from "../../components/selectBox";
 import BreadCrumb from "../../components/Breadcrumb";
 import Table from "../../components/TableWithAction";
 import SearchInput from "../../components/SearchInput";
+import SAlert from "../../components/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCheckouts } from "../../redux/checkouts/actions";
 import Swal from "sweetalert2";
@@ -14,8 +15,9 @@ import Navbar from "../../components/navbar";
 
 function WorkOrderPage() {
   const dispatch = useDispatch();
+
+  const notif = useSelector((state) => state.notif);
   const checkouts = useSelector((state) => state.checkouts);
-  console.log("lihat", checkouts)
 
   useEffect(() => {
     dispatch(fetchCheckouts());
@@ -71,6 +73,10 @@ function WorkOrderPage() {
           />
         </Col>
       </Row>
+
+      {notif.status && (
+        <SAlert type={notif.typeNotif} message={notif.message} />
+      )}
 
       <Table
         status={checkouts.status}

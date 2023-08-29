@@ -8,9 +8,12 @@ import SAlert from "../../components/Alert";
 import { toast } from "react-toastify";
 import DepartementInput from "../../components/Departement-Input/DepartementInput";
 import Navbar from "../../components/navbar";
+import { setNotif } from "../../redux/notif/actions";
+import { useDispatch } from "react-redux";
 
 function EditDepartement() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [form, setForm] = useState({
     nama: "",
@@ -48,22 +51,26 @@ function EditDepartement() {
       nama: form.nama,
     };
 
-    await putData(`/departement/${id}`, payload)
-      .then((res) => {
-        if (res.data.status === true) {
-          toast.success(`Berhasil update departement`);
-          navigate("/departement-page");
-          setIsLoading(false);
-        } else {
-          setIsLoading(true);
-          alert({
-            status: false,
-            type: "danger",
-            message: "gagal",
-          });
-        }
-      })
-      .catch((err) => console.log("ini errror", err));
+    const res = await putData(`/departement/${id}`, payload);
+    if (res?.data?.data) {
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil update departement ${res.data.data.nama}`
+        )
+      );
+      navigate("/departement-page");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setAlert({
+        ...alert,
+        status: true,
+        type: "danger",
+        message: res.response.data.msg,
+      });
+    }
   };
 
   return (
@@ -75,7 +82,7 @@ function EditDepartement() {
           urlSecound={"/departement-page"}
           textThird="Edit"
         />
-        <div className="m-auto" style={{ width: "50%" }}>
+        <div className="m-auto" style={{ width: "60%" }}>
           {alert.status && <SAlert type={alert.type} message={alert.message} />}
         </div>
         <Card style={{ width: "60%" }} className="m-auto mt-5">

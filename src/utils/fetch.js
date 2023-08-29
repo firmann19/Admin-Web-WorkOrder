@@ -1,5 +1,6 @@
 import axios from "axios";
 import { config } from "../configs";
+import handleError from "./handleError";
 
 export async function postData(url, payload, formData) {
   try {
@@ -15,7 +16,7 @@ export async function postData(url, payload, formData) {
       },
     });
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 }
 
@@ -32,7 +33,7 @@ export async function getData(url, params) {
       },
     });
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 }
 
@@ -48,7 +49,7 @@ export async function putData(url, payload) {
       },
     });
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 }
 
@@ -64,6 +65,6 @@ export async function deleteData(url) {
       },
     });
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 }
