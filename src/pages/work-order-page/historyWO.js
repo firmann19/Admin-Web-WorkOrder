@@ -82,7 +82,7 @@ function HistoryWO() {
         setNotif(
           true,
           "success",
-          `berhasil Close Work Order ${res.data.data.userRequest.name}`
+          'berhasil Close Work Order'
         )
       );
       navigate("/work-order-page");

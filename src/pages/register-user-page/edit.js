@@ -127,7 +127,7 @@ function EditUser() {
         setNotif(
           true,
           "success",
-          `berhasil update user ${res.data.data.name}`
+          'berhasil update user'
         )
       );
       navigate("/register-page");

@@ -58,14 +58,16 @@ function RegisterPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteData(`/user/${id}`);
+        if(res?.data?.data){
         dispatch(
           setNotif(
             true,
             "success",
-            `berhasil hapus user ${res.data.data.name}`
+            'berhasil hapus user'
           )
         );
         dispatch(fetchUsers());
+       }
       }
     });
   };

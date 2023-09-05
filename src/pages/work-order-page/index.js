@@ -39,16 +39,16 @@ function WorkOrderPage() {
           StatusPengerjaan: status === "OnProgress" ? "Pending" : "OnProgress",
         };
         const res = await putData(`/statusPengerjaan/${id}`, payload);
-
+        if(res?.data?.data){
         dispatch(
           setNotif(
             true,
             "success",
-            `berhasil ubah status event ${res.data.data.title}`
+            'berhasil ubah status event'
           )
         );
-
         dispatch(fetchCheckouts());
+       }
       }
     });
   };

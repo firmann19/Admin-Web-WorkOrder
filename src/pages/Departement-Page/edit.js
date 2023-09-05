@@ -5,7 +5,6 @@ import { getData, putData } from "../../utils/fetch";
 import BreadCrumb from "../../components/Breadcrumb";
 import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
-import { toast } from "react-toastify";
 import DepartementInput from "../../components/Departement-Input/DepartementInput";
 import Navbar from "../../components/navbar";
 import { setNotif } from "../../redux/notif/actions";
@@ -52,12 +51,13 @@ function EditDepartement() {
     };
 
     const res = await putData(`/departement/${id}`, payload);
+    console.log('test edit' , res)
     if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
           "success",
-          `berhasil update departement ${res.data.data.nama}`
+          'berhasil update departement'
         )
       );
       navigate("/departement-page");

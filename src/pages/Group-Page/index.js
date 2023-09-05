@@ -37,14 +37,16 @@ function GroupPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteData(`/group/${id}`);
+        if(res?.data?.data) {
         dispatch(
           setNotif(
             true,
             "success",
-            `berhasil hapus group ${res.data.data.name}`
+            'berhasil hapus group'
           )
         );
         dispatch(fetchGroups());
+      }
       }
     });
   };

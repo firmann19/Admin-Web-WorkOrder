@@ -102,7 +102,7 @@ function ConfirmationWO() {
         setNotif(
           true,
           "success",
-          `berhasil konfirmasi Work Order ${res.data.data.userRequest.name}`
+          'berhasil konfirmasi Work Order'
         )
       );
       navigate("/work-order-page");

@@ -56,7 +56,7 @@ function EditGroup() {
         setNotif(
           true,
           "success",
-          `berhasil update Group ${res.data.data.nama}`
+          'berhasil update Group'
         )
       );
       navigate("/group-page");

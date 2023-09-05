@@ -37,14 +37,16 @@ function DepartementPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteData(`/departement/${id}`);
+        if(res?.data?.data){
         dispatch(
           setNotif(
             true,
             "success",
-            `berhasil hapus departement ${res.data.data.nama}`
+            'berhasil hapus departement'
           )
         );
         dispatch(fetchDepartements());
+       }
       }
     });
   };
