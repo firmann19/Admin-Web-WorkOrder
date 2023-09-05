@@ -103,7 +103,6 @@ function WorkOrderPage() {
         ]}
         confirmationUrl={`/work-order-page/confirmation-wo`}
         Detail={`/work-order-page/history-wo`}
-        //editUrl={`/register-page/edit-user`}
         customAction={(id, status = "") => {
           return (
             <Button

@@ -9,7 +9,10 @@ let initialState = localStorage.getItem("auth")
       idUser: null,
       getManager: null,
       getNameManager: null,
-      getCountWO: null
+      getCountWO: null,
+      getCountUser: null,
+      getCountDepartement: null,
+      getCountGroup: null,
     };
 
 export default function reducer(state = initialState, action) {
@@ -22,7 +25,10 @@ export default function reducer(state = initialState, action) {
         idUser: action.idUser,
         getManager: action.getManager,
         getNameManager: action.getNameManager,
-        getCountWO: action.getCountWO
+        getCountWO: action.getCountWO,
+        getCountUser: action.getCountUser,
+        getCountDepartement: action.getCountDepartement,
+        getCountGroup: action.getCountGroup,
       };
 
     case USER_LOGOUT:
@@ -33,7 +39,10 @@ export default function reducer(state = initialState, action) {
         idUser: null,
         getManager: null,
         getNameManager: null,
-        getCountWO: null
+        getCountWO: null,
+        getCountUser: null,
+        getCountDepartement: null,
+        getCountGroup: null,
       };
 
     default:

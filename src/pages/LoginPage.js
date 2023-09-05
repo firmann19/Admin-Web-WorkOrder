@@ -42,7 +42,10 @@ function LoginPage() {
           res.data.data.idUser,
           res.data.data.getManager,
           res.data.data.getNameManager,
-          res.data.data.getCountWO
+          res.data.data.getCountWO,
+          res.data.data.getCountUser,
+          res.data.data.getCountDepartement,
+          res.data.data.getCountGroup
         )
       );
 
